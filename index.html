@@ -585,12 +585,13 @@
       min-height: 240px;
       display: block;
       object-fit: cover;
-      transition: transform .35s ease;
+      transition: transform .35s ease, filter .35s ease;
       filter: saturate(0.94) contrast(1.03);
     }
 
     .accommodation-image:hover img {
       transform: scale(1.04);
+      filter: brightness(1.03);
     }
 
     /* COUNTDOWN */
@@ -627,6 +628,7 @@
       color: var(--accent-3);
       line-height: 1;
       margin-bottom: 10px;
+      text-shadow: 0 0 18px rgba(216,179,138,0.24);
     }
 
     .countdown-card small {
@@ -646,45 +648,175 @@
       color: var(--text);
     }
 
-    @media (max-width: 1024px) {
-      .hero {
-        align-items: center;
+    /* ========== PREMIUM RESPONSIVE ========== */
+
+    @media (max-width: 1100px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding-top: 92px;
+        padding-bottom: 64px;
       }
 
-      .hero-content,
-      .route-grid,
-      .places-grid,
-      .info-grid,
-      .accommodation-gallery {
+      .hero-copy {
+        max-width: 100%;
+      }
+
+      .places-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .info-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-content {
-        padding-top: 72px;
-        padding-bottom: 72px;
+      .accommodation-gallery {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (max-width: 720px) {
       .container {
-        padding: 0 16px;
+        padding: 0 18px;
+      }
+
+      header {
+        backdrop-filter: blur(10px);
+      }
+
+      .nav {
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .brand-badge {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+      }
+
+      .nav-links {
+        width: 100%;
+        gap: 8px;
+      }
+
+      .nav-links a {
+        padding: 10px 12px;
+      }
+
+      .hero {
+        min-height: 92vh;
+        align-items: center;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(to bottom, rgba(7,9,13,0.90) 0%, rgba(10,12,17,0.76) 45%, rgba(10,12,17,0.55) 100%);
+      }
+
+      .hero-content {
+        padding-top: 56px;
+        padding-bottom: 52px;
+        gap: 18px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 10vw, 3rem);
+        line-height: 1.04;
+      }
+
+      .slogan {
+        font-size: 1.16rem;
+        margin-top: 12px;
+      }
+
+      .hero-actions {
+        margin-top: 24px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-panel {
+        padding: 18px;
       }
 
       .meta-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-content {
-        padding-top: 52px;
-        padding-bottom: 52px;
+      .meta-item {
+        padding: 13px;
       }
 
-      .hero h1 {
-        font-size: clamp(2rem, 10vw, 3rem);
+      section.content-section {
+        padding: 60px 0;
       }
 
-      .slogan {
-        font-size: 1.18rem;
+      .section-head {
+        margin-bottom: 24px;
+        gap: 16px;
+      }
+
+      .section-head h2 {
+        font-size: clamp(1.55rem, 7vw, 2.2rem);
+      }
+
+      .section-head p {
+        margin-top: 8px;
+        line-height: 1.8;
+        font-size: 0.98rem;
+      }
+
+      .card-body {
+        padding: 18px;
+      }
+
+      .info-card p,
+      .place-card p,
+      .route-card p {
+        line-height: 1.8;
+      }
+
+      .places-grid,
+      .accommodation-gallery,
+      .countdown-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .place-card img {
+        height: 210px;
+      }
+
+      .accommodation-image {
+        min-height: 220px;
+      }
+
+      .accommodation-image img {
+        min-height: 220px;
+      }
+
+      .countdown-section {
+        padding-top: 20px;
+      }
+
+      .countdown-card {
+        padding: 22px 18px;
+      }
+
+      .countdown-card span {
+        font-size: 2.35rem;
+      }
+
+      .place-actions,
+      .route-actions {
+        gap: 14px;
       }
 
       .route-actions .btn,
@@ -693,8 +825,12 @@
         flex: 1 1 100%;
       }
 
-      .countdown-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .glass-card {
+        border-radius: 20px;
+      }
+
+      footer {
+        padding: 24px 0 36px;
       }
     }
   </style>
@@ -882,7 +1018,7 @@
         </div>
       </div>
 
-      <!-- NEUE 6-BILDER-GALERIE -->
+      <!-- 6-BILDER-GALERIE -->
       <div class="accommodation-gallery">
         <div class="accommodation-image">
           <img src="https://imgservice.rentbyowner.com/680x408/das-alte-pastorat-de-kevelaer-bc-5415524-0.jpg" alt="Außenansicht des Alten Pastorats" loading="lazy">
@@ -891,16 +1027,16 @@
           <img src="https://2.brf.be/wp-content/uploads/sites/3/2023/03/das-alte-pastorat-mit-garten-1200x800.jpg" alt="Das Alte Pastorat mit Garten" loading="lazy">
         </div>
         <div class="accommodation-image">
-          <img src="https://www.gruppenunterkuenfte.de/img-webp/n513x342/Altes-Pastorat-Rouenhof-__t13397i.webp" alt="Ess- und Gemeinschaftsbereich im Alten Pastorat" loading="lazy">
+          <img src="https://www.gruppenunterkuenfte.de/img-webp/n513x342/Altes-Pastorat-Rouenhof-__t13397i.webp" alt="Ess- und Aufenthaltsbereich im Alten Pastorat" loading="lazy">
         </div>
         <div class="accommodation-image">
           <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/635497043.jpg?k=33ed8dfbac42aefe9243240f679d1201a4e209b3444c6a973aabd5f3ad997f67&o=" alt="Schlafzimmer im Alten Pastorat" loading="lazy">
         </div>
         <div class="accommodation-image">
-          <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/635497796.jpg?k=61821f464b65561c9bc4ca2b99ef5497fbf3f97bc1328eed638a10b9fd599567&o=&hp=1" alt="Weiteres Zimmer im Alten Pastorat" loading="lazy">
+          <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/635497796.jpg?k=61821f464b65561c9bc4ca2b99ef5497fbf3f97bc1328eed638a10b9fd599567&o=&hp=1" alt="Weiteres Schlafzimmer im Alten Pastorat" loading="lazy">
         </div>
         <div class="accommodation-image">
-          <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/631174141.jpg?k=6004847d1b44163f6e158441c2462479a452784b267098121f4509fd7e3a2282&o=&hp=1" alt="Großer Wohn- und Essbereich im Michelshof" loading="lazy">
+          <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/631174141.jpg?k=6004847d1b44163f6e158441c2462479a452784b267098121f4509fd7e3a2282&o=&hp=1" alt="Innenraum im Gutshaus Michelshof" loading="lazy">
         </div>
       </div>
 
@@ -950,7 +1086,7 @@
               class="btn btn-secondary"
               target="_blank"
               rel="noopener noreferrer"
-              href="https://www.google.com/maps/dir/?api=1&destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
+              href="https://www.google.com/maps/dir/?api=1&amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
               In Google Maps öffnen
             </a>
           </div>
