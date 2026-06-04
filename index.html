@@ -593,6 +593,49 @@
       transform: scale(1.04);
     }
 
+    /* COUNTDOWN */
+    .countdown-section {
+      padding-top: 40px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .countdown-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 24px;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .countdown-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(216,179,138,.25);
+      box-shadow: 0 18px 35px rgba(0,0,0,.28);
+    }
+
+    .countdown-card span {
+      display: block;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: var(--accent-3);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .countdown-card small {
+      display: block;
+      color: var(--muted);
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+
     footer {
       border-top: 1px solid rgba(255,255,255,.08);
       padding: 28px 0 48px;
@@ -649,6 +692,10 @@
         width: 100%;
         flex: 1 1 100%;
       }
+
+      .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
@@ -661,12 +708,11 @@
         <div>Familientreffen 2027</div>
       </div>
 
-      
-<nav class="nav-links">
-  <a href="#ueberblick">Überblick</a>
-  <a href="#orte">Orte</a>
-  <a href="#unterkunft">Unterkunft</a>
-</nav>
+      <nav class="nav-links">
+        <a href="#ueberblick">Überblick</a>
+        <a href="#orte">Orte</a>
+        <a href="#unterkunft">Unterkunft</a>
+      </nav>
 
     </div>
   </header>
@@ -686,10 +732,9 @@
         <h1>Familientreffen 2027</h1>
         <div class="slogan">„Einfach mal Pott fühlen.“</div>
 
-        
-<div class="hero-actions">
-  <a class="btn btn-primary" href="#orte">Orte entdecken</a>
-</div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#orte">Orte entdecken</a>
+        </div>
 
       </div>
 
@@ -725,6 +770,40 @@
     </div>
 
     <div class="scroll-indicator">↓</div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="content-section countdown-section" id="countdown">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Der Countdown läuft</h2>
+          <p>
+            Bis zu unserem Familientreffen wächst die Vorfreude mit jedem Tag –
+            auf gemeinsame Zeit, besondere Orte und viele schöne Erinnerungen.
+          </p>
+        </div>
+      </div>
+
+      <div class="countdown-grid">
+        <div class="countdown-card">
+          <span id="days">0</span>
+          <small>Tage</small>
+        </div>
+        <div class="countdown-card">
+          <span id="hours">0</span>
+          <small>Stunden</small>
+        </div>
+        <div class="countdown-card">
+          <span id="minutes">0</span>
+          <small>Minuten</small>
+        </div>
+        <div class="countdown-card">
+          <span id="seconds">0</span>
+          <small>Sekunden</small>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ÜBERBLICK -->
@@ -862,7 +941,7 @@
               class="btn btn-secondary"
               target="_blank"
               rel="noopener noreferrer"
-              href="https://www.google.com/maps/dir/?api=1&amp;amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
+              href="https://www.google.com/maps/dir/?api=1&amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
               In Google Maps öffnen
             </a>
           </div>
@@ -876,11 +955,7 @@
   <section class="content-section" id="routen">
     <div class="container route-grid">
       <div>
-        
-        
       </div>
-
-     
     </div>
   </section>
 
@@ -897,6 +972,34 @@
       name: 'Das Alte Pastorat',
       address: 'Sonsbecker Straße 40, 47627 Kevelaer-Kervendonk'
     };
+
+    // LIVE COUNTDOWN
+    function updateCountdown() {
+      const targetDate = new Date('2027-05-06T00:00:00').getTime();
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("days").textContent = 0;
+        document.getElementById("hours").textContent = 0;
+        document.getElementById("minutes").textContent = 0;
+        document.getElementById("seconds").textContent = 0;
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
     const places = [
       {
@@ -928,7 +1031,7 @@
         city: 'Mülheim',
         type: 'Schloss',
         note: 'Historische Burganlage, perfekt für einen entspannten Ausflug.',
-        image: 'https://images.pexels.com/photos/33128431/pexels-photo-33128431/free-photo-of-historic-schloss-broich-in-mulheim-germany.jpeg?auto=compress&amp;amp;cs=tinysrgb&amp;amp;w=1260&amp;amp;h=750&amp;amp;dpr=1',
+        image: 'https://images.pexels.com/photos/33128431/pexels-photo-33128431/free-photo-of-historic-schloss-broich-in-mulheim-germany.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         destination: 'Schloss Broich Mülheim'
       },
       {
@@ -971,53 +1074,38 @@
         image: 'https://www.golocal.de/media/9451677319b5dfa6017d06f7b2d1dd8d/700/de863ed4af48edf4.JPG',
         destination: 'Irrland Kevelaer'
       },
-
-
-
-{
-  name: 'Nordsternpark',
-  city: 'Gelsenkirchen',
-  type: 'Park',
-  note: 'Großer Landschaftspark auf ehemaligem Zechengelände mit Industriekultur, Aussichtspunkten und viel Grün zum Entspannen.',
-  image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Gelsenkirchen_-_Nordsternpark_-_Kohlenbunker%2BBandbr%C3%BCcke%2BKohlenmischanlage_%28Pyramide%29_03_ies.jpg/1280px-Gelsenkirchen_-_Nordsternpark_-_Kohlenbunker%2BBandbr%C3%BCcke%2BKohlenmischanlage_%28Pyramide%29_03_ies.jpg',
-  destination: 'Nordsternpark Gelsenkirchen'
-},
-{
-  name: 'Archäologischer Park Xanten',
-  city: 'Xanten',
-  type: 'Museum',
-  note: 'Großes Freilichtmuseum auf dem Gelände einer römischen Stadt mit rekonstruierten Gebäuden, Amphitheater und Römermuseum.',
-  image: 'https://www.deutschlandmalanders.com/wp-content/uploads/2020/04/Archäologischer-Park-Xanten-2-1068x712.jpg',
-  destination: 'APX Xanten'
-},
-{
-  name: 'Schloss Moyland',
-  city: 'Bedburg-Hau',
-  type: 'Schloss',
-  note: 'Historisches Wasserschloss mit großer Parkanlage und Museum für moderne Kunst – ideal für einen entspannten Ausflug.',
-  image: 'https://cdn.pixabay.com/photo/2016/03/28/18/59/castle-1286650_960_720.jpg',
-  destination: 'Schloss Moyland'
-},
-
-   
-
-
-
-{
-  name: 'Eisenbahnmuseum Bochum',
-  city: 'Bochum',
-  type: 'Museum',
-  note: 'Das größte private Eisenbahnmuseum Deutschlands mit historischen Lokomotiven, Waggons und spannender Technikgeschichte – ein tolles Ausflugsziel für Familien.',
-  image: 'https://www.bochum-tourismus.de/media/_processed_/9/c/csm_Dahlhausen_Eisenbahnmuseum_Lok_eb8bda4e8b.jpg',
-  destination: 'Eisenbahnmuseum Bochum'
-}
-
-
-
-   
-
-
-
+      {
+        name: 'Nordsternpark',
+        city: 'Gelsenkirchen',
+        type: 'Park',
+        note: 'Großer Landschaftspark auf ehemaligem Zechengelände mit Industriekultur, Aussichtspunkten und viel Grün zum Entspannen.',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Gelsenkirchen_-_Nordsternpark_-_Kohlenbunker%2BBandbr%C3%BCcke%2BKohlenmischanlage_%28Pyramide%29_03_ies.jpg/1280px-Gelsenkirchen_-_Nordsternpark_-_Kohlenbunker%2BBandbr%C3%BCcke%2BKohlenmischanlage_%28Pyramide%29_03_ies.jpg',
+        destination: 'Nordsternpark Gelsenkirchen'
+      },
+      {
+        name: 'Archäologischer Park Xanten',
+        city: 'Xanten',
+        type: 'Museum',
+        note: 'Großes Freilichtmuseum auf dem Gelände einer römischen Stadt mit rekonstruierten Gebäuden, Amphitheater und Römermuseum.',
+        image: 'https://www.deutschlandmalanders.com/wp-content/uploads/2020/04/Archäologischer-Park-Xanten-2-1068x712.jpg',
+        destination: 'APX Xanten'
+      },
+      {
+        name: 'Schloss Moyland',
+        city: 'Bedburg-Hau',
+        type: 'Schloss',
+        note: 'Historisches Wasserschloss mit großer Parkanlage und Museum für moderne Kunst – ideal für einen entspannten Ausflug.',
+        image: 'https://cdn.pixabay.com/photo/2016/03/28/18/59/castle-1286650_960_720.jpg',
+        destination: 'Schloss Moyland'
+      },
+      {
+        name: 'Eisenbahnmuseum Bochum',
+        city: 'Bochum',
+        type: 'Museum',
+        note: 'Das größte private Eisenbahnmuseum Deutschlands mit historischen Lokomotiven, Waggons und spannender Technikgeschichte – ein tolles Ausflugsziel für Familien.',
+        image: 'https://www.bochum-tourismus.de/media/_processed_/9/c/csm_Dahlhausen_Eisenbahnmuseum_Lok_eb8bda4e8b.jpg',
+        destination: 'Eisenbahnmuseum Bochum'
+      }
     ];
 
     const placesGrid = document.getElementById('placesGrid');
@@ -1025,11 +1113,9 @@
     const routeFrame = document.getElementById('routeFrame');
     const routeSummary = document.getElementById('routeSummary');
 
-    
-function mapEmbedUrl(destination) {
-  return `https://maps.google.com/maps?q=${encodeURIComponent(destination)}&output=embed`;
-}
-
+    function mapEmbedUrl(destination) {
+      return `https://maps.google.com/maps?q=${encodeURIComponent(destination)}&output=embed`;
+    }
 
     function directionsUrl(destination) {
       return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(accommodation.address)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
