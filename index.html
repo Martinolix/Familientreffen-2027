@@ -801,7 +801,7 @@
       transform: translateY(0);
     }
 
-    /* ========== AUSFLUGS-LIGHTBOX ========== */
+    /* ===== LIGHTBOX FÜR AUSFLÜGE ===== */
 
     .lightbox {
       position: fixed;
@@ -832,7 +832,7 @@
       max-height: min(92vh, 900px);
       overflow: auto;
       border-radius: 26px;
-      background: linear-gradient(180deg, rgba(20, 24, 31, 0.96), rgba(13, 17, 23, 0.98));
+      background: linear-gradient(180deg, rgba(20,24,31,0.96), rgba(13,17,23,0.98));
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow: 0 28px 80px rgba(0,0,0,0.45);
       animation: lightboxUp 0.28s ease;
@@ -1484,6 +1484,7 @@
 
     const placesGrid = document.getElementById('placesGrid');
     const filterRow = document.getElementById('filterRow');
+
     const lightbox = document.getElementById('placeLightbox');
     const lightboxClose = document.getElementById('lightboxClose');
     const lightboxImage = document.getElementById('lightboxImage');
