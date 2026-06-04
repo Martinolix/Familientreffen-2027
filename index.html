@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
-="UTF-8"><head>
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Familientreffen 2027</title>
   <meta name="description" content="Familientreffen 2027 – ein besonderes Wochenende im Ruhrgebiets-Stil mit gemeinsamen Ausflügen, Unterkunft und Vorfreude.">
@@ -666,10 +667,6 @@
       cursor: pointer;
     }
 
-    .place-card .btn {
-      pointer-events: auto;
-    }
-
     .place-media {
       position: relative;
       aspect-ratio: 16 / 11;
@@ -784,58 +781,13 @@
     }
 
     .footer {
-      padding: 24px 0 calc(104px + var(--safe-bottom));
+      padding: 24px 0 42px;
       border-top: 1px solid rgba(255,255,255,0.08);
       color: var(--muted);
     }
 
     .footer strong {
       color: var(--text);
-    }
-
-    .mobile-dock {
-      position: fixed;
-      left: 12px;
-      right: 12px;
-      bottom: calc(12px + var(--safe-bottom));
-      z-index: 80;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      padding: 10px;
-      border-radius: 22px;
-      background: rgba(10, 12, 16, 0.82);
-      border: 1px solid rgba(255,255,255,0.10);
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow-xl);
-    }
-
-    .dock-link {
-      min-height: 54px;
-      display: grid;
-      place-items: center;
-      gap: 4px;
-      padding: 8px 6px;
-      border-radius: 16px;
-      color: var(--muted);
-      font-size: 0.74rem;
-      font-weight: 700;
-      text-align: center;
-      transition: 0.2s ease;
-    }
-
-    .dock-link span {
-      display: block;
-      font-size: 1.05rem;
-      line-height: 1;
-    }
-
-    .dock-link:hover,
-    .dock-link:focus-visible,
-    .dock-link.is-active {
-      color: var(--text);
-      background: rgba(255,255,255,0.08);
-      outline: none;
     }
 
     [data-reveal] {
@@ -1044,14 +996,6 @@
       .address-wrap {
         grid-template-columns: 1fr auto;
         align-items: end;
-      }
-
-      .footer {
-        padding-bottom: 42px;
-      }
-
-      .mobile-dock {
-        display: none;
       }
 
       .scroll-cue {
@@ -1394,25 +1338,6 @@
         </p>
       </div>
     </footer>
-
-    <nav class="mobile-dock" aria-label="Mobile Navigation">
-      <a class="dock-link" href="#top" data-dock-link="top">
-        <span aria-hidden="true">⌂</span>
-        Start
-      </a>
-      <a class="dock-link" href="#countdown" data-dock-link="countdown">
-        <span aria-hidden="true">⏳</span>
-        Countdown
-      </a>
-      <a class="dock-link" href="#orte" data-dock-link="orte">
-        <span aria-hidden="true">✦</span>
-        Orte
-      </a>
-      <a class="dock-link" href="#unterkunft" data-dock-link="unterkunft">
-        <span aria-hidden="true">⌂</span>
-        Unterkunft
-      </a>
-    </nav>
   </div>
 
   <!-- Lightbox für Ausflugsorte -->
@@ -1719,30 +1644,6 @@
       });
     }
 
-    function setupDockObserver() {
-      const ids = ['top', 'countdown', 'orte', 'unterkunft'];
-      const sections = ids
-        .map(id => document.getElementById(id))
-        .filter(Boolean);
-
-      const dockLinks = document.querySelectorAll('[data-dock-link]');
-      if (!sections.length || !dockLinks.length) return;
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            dockLinks.forEach(link => {
-              link.classList.toggle('is-active', link.dataset.dockLink === entry.target.id);
-            });
-          }
-        });
-      }, {
-        threshold: 0.45
-      });
-
-      sections.forEach(section => observer.observe(section));
-    }
-
     lightboxClose.addEventListener('click', closeLightbox);
 
     lightbox.addEventListener('click', (event) => {
@@ -1763,7 +1664,7 @@
     renderFilters();
     renderPlaces();
     revealElements();
-    setupDockObserver();
   </script>
 </body>
 </html>
+``
