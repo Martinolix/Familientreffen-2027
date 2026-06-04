@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Familientreffen 2027</title>
+
+  <style>
+    :root {
+      /* Ruhrgebiet-Farbkonzept: Kohle, Stahl, Rost */
+      --bg: #0f1115;
+      --bg-2: #181c22;
+      --bg-3: #20252d;
+      --card: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.10);
+
+      --text: #f3f1ec;
+      --muted: #c7c9cf;
+
+      --accent: #b5532f;    /* Rostrot */
+      --accent-2: #7d8b98;  /* Stahlgrau */
+      --accent-3: #d8b38a;  /* warmer Sandton */
+
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --shadow-soft: 0 12px 30px rgba(0,0,0,.25);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(125,139,152,0.10), transparent 22%),
+        radial-gradient(circle at top left, rgba(181,83,47,0.08), transparent 20%),
+        linear-gradient(180deg, #0b0d11 0%, #12151b 45%, #0f1218 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(10, 12, 17, 0.68);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, var(--accent), var(--accent-3));
+      color: #140d09;
+      font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: .25s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+    }
+
+    .hero-slideshow .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center center;
+      opacity: 0;
+      transform: scale(1.08);
+      animation: heroFade 28s infinite;
+      filter: saturate(0.95) contrast(1.02);
+    }
+
+    .hero-slideshow .slide:nth-child(1) { animation-delay: 0s; }
+    .hero-slideshow .slide:nth-child(2) { animation-delay: 7s; }
+    .hero-slideshow .slide:nth-child(3) { animation-delay: 14s; }
+    .hero-slideshow .slide:nth-child(4) { animation-delay: 21s; }
+
+    @keyframes heroFade {
+      0%   { opacity: 0; transform: scale(1.12); }
+      5%   { opacity: 1; }
+      25%  { opacity: 1; transform: scale(1.02); }
+      30%  { opacity: 0; }
+      100% { opacity: 0; transform: scale(1.08); }
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(7,9,13,0.97) 0%, rgba(10,12,17,0.82) 45%, rgba(10,12,17,0.30) 80%);
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -60px;
+      left: -40px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(181,83,47,0.22), transparent 70%);
+      filter: blur(90px);
+      z-index: -1;
+    }
+
+    .hero-content {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.07fr .93fr;
+      gap: 30px;
+      width: 100%;
+      z-index: 1;
+      padding-top: 120px;
+      padding-bottom: 80px;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      animation: fadeUp 1.15s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      0%   { opacity: 0; transform: translateY(26px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: linear-gradient(145deg, var(--accent), var(--accent-3));
+      color: #180f0a;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -1.2px;
+      text-shadow: 0 10px 35px rgba(0,0,0,0.95);
+    }
+
+    .slogan {
+      margin-top: 14px;
+      display: inline-block;
+      font-size: clamp(1.15rem, 2.3vw, 1.65rem);
+      font-style: italic;
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--accent-3);
+      letter-spacing: 0.4px;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.75);
+      position: relative;
+      animation: sloganFloat 4.8s ease-in-out infinite, sloganFadeIn 1.4s ease forwards;
+      opacity: 0;
+    }
+
+    .slogan::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, rgba(216,179,138,0.0), rgba(216,179,138,0.75), rgba(216,179,138,0.0));
+      animation: sloganShimmer 5s ease-in-out infinite;
+    }
+
+    @keyframes sloganFadeIn {
+      0%   { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes sloganFloat {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-2px); }
+    }
+
+    @keyframes sloganShimmer {
+      0%   { opacity: 0.15; transform: scaleX(0.95); }
+      50%  { opacity: 0.55; transform: scaleX(1); }
+      100% { opacity: 0.15; transform: scaleX(0.95); }
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      min-height: 46px;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(145deg, var(--accent), #cf7a4f);
+      color: #180f0a;
+      box-shadow: 0 10px 25px rgba(181,83,47,0.28);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 14px 28px rgba(181,83,47,0.38);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: var(--text);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.20);
+    }
+
+    .hero-panel,
+    .glass-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-panel {
+      padding: 22px;
+      animation: fadeUp 1.35s ease forwards;
+    }
+
+    .hero-panel h3 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: var(--muted);
+      text-shadow: none;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .meta-item {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .meta-item .label {
+      display: block;
+      font-size: .84rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .meta-item strong {
+      font-size: .98rem;
+      line-height: 1.45;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.4rem;
+      opacity: 0.6;
+      animation: bounce 2s infinite;
+      z-index: 2;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translate(-50%,0); }
+      50% { transform: translate(-50%,10px); }
+    }
+
+    section.content-section {
+      padding: 84px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 22px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3.2vw, 3rem);
+      letter-spacing: -1px;
+    }
+
+    .section-head p {
+      margin: 10px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .info-grid,
+    .places-grid,
+    .route-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .info-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .places-grid {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: stretch;
+    }
+
+    .route-grid {
+      grid-template-columns: 1.1fr .9fr;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(216,179,138,.25);
+      box-shadow: 0 22px 40px rgba(0,0,0,.35);
+    }
+
+    .card-body {
+      padding: 22px;
+    }
+
+    .info-card h3,
+    .place-card h3,
+    .route-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+    }
+
+    .info-card p,
+    .place-card p,
+    .route-card p,
+    .route-summary p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .place-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .place-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.92) contrast(1.02);
+      transition: transform .35s ease;
+    }
+
+    .place-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .place-card .card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .place-card p {
+      flex-grow: 1;
+    }
+
+    .place-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
+      color: #e5ddd2;
+      font-size: .84rem;
+      letter-spacing: .2px;
+      backdrop-filter: blur(6px);
+    }
+
+    .place-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .place-actions .btn,
+    .route-card .btn {
+      width: 100%;
+    }
+
+    .route-map {
+      padding: 22px;
+      min-height: 540px;
+    }
+
+    .route-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .route-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+    }
+
+    .route-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(216,179,138,.20);
+      box-shadow: 0 18px 35px rgba(0,0,0,.28);
+    }
+
+    .route-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .route-actions .btn {
+      flex: 1 1 160px;
+    }
+
+    iframe.route-frame {
+      width: 100%;
+      height: 520px;
+      border: 0;
+      border-radius: 24px;
+      background: #0d1218;
+    }
+
+    /* Unterkunft-Bildzeile */
+    .accommodation-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .accommodation-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+      min-height: 240px;
+    }
+
+    .accommodation-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      display: block;
+      object-fit: cover;
+      transition: transform .35s ease;
+      filter: saturate(0.94) contrast(1.03);
+    }
+
+    .accommodation-image:hover img {
+      transform: scale(1.04);
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 28px 0 48px;
+      color: var(--muted);
+    }
+
+    footer strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 1024px) {
+      .hero {
+        align-items: center;
+      }
+
+      .hero-content,
+      .route-grid,
+      .places-grid,
+      .info-grid,
+      .accommodation-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        padding-top: 72px;
+        padding-bottom: 72px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        padding-top: 52px;
+        padding-bottom: 52px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 10vw, 3rem);
+      }
+
+      .slogan {
+        font-size: 1.18rem;
+      }
+
+      .route-actions .btn,
+      .place-actions .btn {
+        width: 100%;
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-badge">FT</div>
+        <div>Familientreffen 2027</div>
+      </div>
+
+      
+<nav class="nav-links">
+  <a href="#ueberblick">Überblick</a>
+  <a href="#orte">Orte</a>
+  <a href="#unterkunft">Unterkunft</a>
+</nav>
+
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-slideshow">
+      <div class="slide" style="background-image:url('https://cdn.pixabay.com/photo/2021/07/31/09/51/zollverein-6511585_1280.jpg');"></div>
+      <div class="slide" style="background-image:url('https://cdn.pixabay.com/photo/2017/11/27/11/25/zeche-zollverein-2981131_1280.jpg');"></div>
+      <div class="slide" style="background-image:url('https://cdn.pixabay.com/photo/2017/03/12/09/51/kokerei-zollverein-2136669_1280.jpg');"></div>
+      <div class="slide" style="background-image:url('https://cdn.pixabay.com/photo/2023/05/02/19/03/bill-7965883_640.jpg');"></div>
+    </div>
+
+    <div class="container hero-content">
+      <div class="hero-copy">
+        <div class="eyebrow">✨ GLÜCK AUF!</div>
+        <h1>Familientreffen 2027</h1>
+        <div class="slogan">„Einfach mal Pott fühlen.“</div>
+
+        
+<div class="hero-actions">
+  <a class="btn btn-primary" href="#orte">Orte entdecken</a>
+</div>
+
+      </div>
+
+      <aside class="hero-panel">
+        <h3>Schnellüberblick</h3>
+        <p>
+          Ein besonderes Wochenende im Ruhrgebiets-Stil – mit gemeinsamer Zeit,
+          Ausflügen und vielen schönen Erinnerungen.
+        </p>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="label">Zeitraum</span>
+            <strong>06.05.2027 – 09.05.2027</strong>
+          </div>
+
+          <div class="meta-item">
+            <span class="label">Unterkunft</span>
+            <strong>Das Alte Pastorat<br>Kevelaer-Kervendonk</strong>
+          </div>
+
+          <div class="meta-item">
+            <span class="label">Treffen</span>
+            <strong>Familientreffen 2027</strong>
+          </div>
+
+          <div class="meta-item">
+            <span class="label">Slogan</span>
+            <strong>Einfach mal Pott fühlen.</strong>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="scroll-indicator">↓</div>
+  </section>
+
+  <!-- ÜBERBLICK -->
+  <section class="content-section" id="ueberblick">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Das Wochenende auf einen Blick</h2>
+          <p>
+            Hier findet ihr Ideen und Möglichkeiten für unser gemeinsames Wochenende –
+            ganz ohne festen Ablauf, einfach zum Durchschauen und inspirieren lassen.
+          </p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <article class="card info-card">
+          <div class="card-body">
+            <h3>Gemeinsame Basis</h3>
+            <p>
+              Das Alte Pastorat bildet den Mittelpunkt unseres Wochenendes – ideal als gemeinsamer Startpunkt für Ausflüge und als Ort für entspannte gemeinsame Abende.
+            </p>
+          </div>
+        </article>
+
+        <article class="card info-card">
+          <div class="card-body">
+            <h3>Ruhrgebiets-Gefühl</h3>
+            <p>
+              Zwischen alten Zechen, grauem Himmel und ehrlicher Arbeit entsteht eine besondere Art von Heimat, die man nicht erklären, sondern nur fühlen kann.
+            </p>
+          </div>
+        </article>
+
+        <article class="card info-card">
+          <div class="card-body">
+            <h3>Alles kann, nichts muss</h3>
+            <p>
+              Diese Seite ist nur eine Sammlung von Ideen –
+              jede*r kann schauen, was interessant ist und worauf man Lust hat.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORTE -->
+  <section class="content-section" id="orte">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Ideen für mögliche Ausflüge</h2>
+          <p>
+            Eine Auswahl an Orten, die sich für gemeinsame Zeit, kleine Ausflüge
+            und schöne Momente im Ruhrgebiet anbieten.
+          </p>
+        </div>
+      </div>
+
+      <div class="places-grid" id="placesGrid"></div>
+    </div>
+  </section>
+
+  <!-- UNTERKUNFT -->
+  <section class="content-section" id="unterkunft">
+    <div class="container">
+      
+      <div class="section-head">
+        <div>
+          <h2>Unser Zuhause für das Wochenende</h2>
+          <p>
+            Das Alte Pastorat wird für diese Tage mehr als nur eine Unterkunft –
+            es ist der gemeinsame Mittelpunkt, an dem wir ankommen, entspannen und Zeit miteinander verbringen.
+          </p>
+        </div>
+      </div>
+
+      <!-- Bildzeile -->
+      <div class="accommodation-gallery">
+        <div class="accommodation-image">
+          <img src="https://imgservice.rentbyowner.com/680x408/das-alte-pastorat-de-kevelaer-bc-5415524-0.jpg" alt="Das Alte Pastorat mit Gartenansicht" loading="lazy">
+        </div>
+        <div class="accommodation-image">
+          <img src="https://www.gruppenunterkuenfte.de/img-webp/n513x342/Altes-Pastorat-oder-Michelshof__t13397d.webp" alt="Backsteinfassade des Alten Pastorats" loading="lazy">
+        </div>
+        <div class="accommodation-image">
+          <img src="https://2.brf.be/wp-content/uploads/sites/3/2023/03/das-alte-pastorat-mit-garten-1200x800.jpg" alt="Das Alte Pastorat mit Garten und ruhiger Umgebung" loading="lazy">
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <article class="card info-card">
+          <div class="card-body">
+            <h3>Atmosphäre</h3>
+            <p>
+              Ein ruhiger Ort mit viel Charme und Geschichte – ideal, um gemeinsam anzukommen,
+              durchzuatmen und das Wochenende entspannt zu genießen.
+            </p>
+          </div>
+        </article>
+
+        <article class="card info-card">
+          <div class="card-body">
+            <h3>Platz für alle</h3>
+            <p>
+              Genug Raum zum Zusammensitzen, für Gespräche, Spiele oder einfach Zeit miteinander –
+              drinnen wie draußen.
+            </p>
+          </div>
+        </article>
+
+        <article class="card info-card">
+          <div class="card-body">
+            <h3>Außenbereich</h3>
+            <p>
+              Garten und Umgebung bieten die Möglichkeit für ruhige Momente,
+              gemeinsames Essen oder einfach ein bisschen frische Luft zwischendurch.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Zusätzliche Infos -->
+      <div style="margin-top:40px;" class="glass-card">
+        <div style="padding:22px;">
+          <h3 style="margin-top:0;">Adresse</h3>
+          <p style="margin:0; color:var(--muted);">
+            Sonsbecker Straße 40<br>
+            47627 Kevelaer-Kervendonk
+          </p>
+
+          <div style="margin-top:18px;">
+            <a
+              class="btn btn-secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.google.com/maps/dir/?api=1&amp;amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
+              In Google Maps öffnen
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ROUTEN -->
+  <section class="content-section" id="routen">
+    <div class="container route-grid">
+      <div>
+        
+        
+      </div>
+
+     
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p style="margin:0;">
+        <strong>Familientreffen 2027</strong> — aktuelle Version mit animiertem Slogan und Ruhrgebiets-Farbkonzept.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const accommodation = {
+      name: 'Das Alte Pastorat',
+      address: 'Sonsbecker Straße 40, 47627 Kevelaer-Kervendonk'
+    };
+
+    const places = [
+      {
+        name: 'Grugapark Essen',
+        city: 'Essen',
+        type: 'Park',
+        note: 'Große Grünanlage mit viel Platz für gemeinsame Zeit.',
+        image: 'https://res.cloudinary.com/adactrips/image/fetch/f_auto,q_auto,w_1200,h_630,c_fill/https://adac.imxplatform.de/data/images/Essen_Grugapark_84914507_c_imago_images%2BRupert_Oberhaeuser.jpg',
+        destination: 'Grugapark Essen'
+      },
+      {
+        name: 'Baldeneysee',
+        city: 'Essen',
+        type: 'See',
+        note: 'Spaziergang, Sonnenuntergang und Ruhe am Wasser.',
+        image: 'https://media.essen.de/media/emg_1/essen_tourismus/bilder_neu_1/startseite_6/Baldeneysee_FV_gef_Val_1024_16zu9.jpg',
+        destination: 'Baldeneysee'
+      },
+      {
+        name: 'Zeche Zollverein',
+        city: 'Essen',
+        type: 'Kultur',
+        note: 'UNESCO-Welterbe mit beeindruckender Industriearchitektur.',
+        image: 'https://media.essen.de/media/histiorisches_portal/historischesportal_bilder/bergbau_1/zeche_zollverein_2/JochenTack-ZV-140903-011_speziell_0900_0700_sv.jpg',
+        destination: 'Zeche Zollverein'
+      },
+      {
+        name: 'Schloss Broich',
+        city: 'Mülheim',
+        type: 'Schloss',
+        note: 'Historische Burganlage, perfekt für einen entspannten Ausflug.',
+        image: 'https://images.pexels.com/photos/33128431/pexels-photo-33128431/free-photo-of-historic-schloss-broich-in-mulheim-germany.jpeg?auto=compress&amp;amp;cs=tinysrgb&amp;amp;w=1260&amp;amp;h=750&amp;amp;dpr=1',
+        destination: 'Schloss Broich Mülheim'
+      },
+      {
+        name: 'Kaisergarten; Tierpark Oberhausen',
+        city: 'Oberhausen',
+        type: 'Zoo',
+        note: 'Familienfreundlich mit Tierpark und viel Grün.',
+        image: 'https://www.oberhausen-tourismus.de/wp-content/uploads/2024/01/DSC9023-scaled.jpeg',
+        destination: 'Kaisergarten Oberhausen'
+      },
+      {
+        name: 'Tiger & Turtle – Magic Mountain',
+        city: 'Duisburg',
+        type: 'Sehenswürdigkeit',
+        note: 'Ein markanter Ort mit starkem Wow-Effekt.',
+        image: 'https://www.rvr.ruhr/fileadmin/_processed_/4/f/csm_Tiger_and_Turtle_Magic_Mountain_RVR_Stefan_Ziese_82ea7970b3.jpg',
+        destination: 'Tiger and Turtle Duisburg'
+      },
+      {
+        name: 'Landschaftspark Duisburg-Nord',
+        city: 'Duisburg',
+        type: 'Kultur',
+        note: 'Industriekultur, Aussicht und viel Platz zum Entdecken – tagsüber und abends besonders spannend.',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Landschaftspark-Duisburg-Nord_Hochofen_Panorama.jpg/1280px-Landschaftspark-Duisburg-Nord_Hochofen_Panorama.jpg',
+        destination: 'Landschaftspark Duisburg-Nord'
+      },
+      {
+        name: 'Freizeitpark Schloss Beck',
+        city: 'Bottrop-Kirchhellen',
+        type: 'Freizeitpark',
+        note: 'Familienfreundlicher Freizeitpark mit Fahrgeschäften, Spielplätzen und viel Grün.',
+        image: 'https://media-cdn.tripadvisor.com/media/photo-o/09/94/85/47/freizeitpark-schloss.jpg',
+        destination: 'Freizeitpark Schloss Beck'
+      },
+      {
+        name: 'Irrland',
+        city: 'Kevelaer-Twisteden',
+        type: 'Freizeitpark',
+        note: 'Freizeitpark für Familien mit Kindern – mit vielen Attraktionen zum Toben, Spielen und Entdecken.',
+        image: 'https://www.golocal.de/media/9451677319b5dfa6017d06f7b2d1dd8d/700/de863ed4af48edf4.JPG',
+        destination: 'Irrland Kevelaer'
+      },
+
+
+
+{
+  name: 'Nordsternpark',
+  city: 'Gelsenkirchen',
+  type: 'Park',
+  note: 'Großer Landschaftspark auf ehemaligem Zechengelände mit Industriekultur, Aussichtspunkten und viel Grün zum Entspannen.',
+  image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Gelsenkirchen_-_Nordsternpark_-_Kohlenbunker%2BBandbr%C3%BCcke%2BKohlenmischanlage_%28Pyramide%29_03_ies.jpg/1280px-Gelsenkirchen_-_Nordsternpark_-_Kohlenbunker%2BBandbr%C3%BCcke%2BKohlenmischanlage_%28Pyramide%29_03_ies.jpg',
+  destination: 'Nordsternpark Gelsenkirchen'
+},
+{
+  name: 'Archäologischer Park Xanten',
+  city: 'Xanten',
+  type: 'Museum',
+  note: 'Großes Freilichtmuseum auf dem Gelände einer römischen Stadt mit rekonstruierten Gebäuden, Amphitheater und Römermuseum.',
+  image: 'https://www.deutschlandmalanders.com/wp-content/uploads/2020/04/Archäologischer-Park-Xanten-2-1068x712.jpg',
+  destination: 'APX Xanten'
+},
+{
+  name: 'Schloss Moyland',
+  city: 'Bedburg-Hau',
+  type: 'Schloss',
+  note: 'Historisches Wasserschloss mit großer Parkanlage und Museum für moderne Kunst – ideal für einen entspannten Ausflug.',
+  image: 'https://cdn.pixabay.com/photo/2016/03/28/18/59/castle-1286650_960_720.jpg',
+  destination: 'Schloss Moyland'
+}
+
+
+
+    ];
+
+    const placesGrid = document.getElementById('placesGrid');
+    const routeList = document.getElementById('routeList');
+    const routeFrame = document.getElementById('routeFrame');
+    const routeSummary = document.getElementById('routeSummary');
+
+    
+function mapEmbedUrl(destination) {
+  return `https://maps.google.com/maps?q=${encodeURIComponent(destination)}&output=embed`;
+}
+
+
+    function directionsUrl(destination) {
+      return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(accommodation.address)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+    }
+
+    function setRoute(place) {
+      if (routeFrame) {
+        routeFrame.src = mapEmbedUrl(place.destination);
+      }
+      if (routeSummary) {
+        routeSummary.innerHTML = `Aktuell ausgewählt: <strong>${place.name}</strong> ab <strong>${accommodation.name}</strong>.`;
+      }
+
+      document.querySelectorAll('[data-route-name]').forEach(btn => {
+        btn.classList.toggle('btn-primary', btn.dataset.routeName === place.name);
+        btn.classList.toggle('btn-secondary', btn.dataset.routeName !== place.name);
+      });
+    }
+
+    places.forEach((place, index) => {
+      const card = document.createElement('article');
+      card.className = 'card place-card';
+      card.innerHTML = `
+        <img src="${place.image}" alt="${place.name}" loading="lazy">
+        <div class="card-body">
+          <h3>${place.name}</h3>
+          <p>${place.note}</p>
+
+          <div class="place-meta">
+            <span class="tag">${place.city}</span>
+            <span class="tag">${place.type}</span>
+          </div>
+
+          <div class="place-actions">
+            <a class="btn btn-secondary" target="_blank" rel="noopener noreferrer" href="${directionsUrl(place.destination)}">Navigation öffnen</a>
+          </div>
+        </div>
+      `;
+      placesGrid.appendChild(card);
+
+      if (routeList) {
+        const route = document.createElement('article');
+        route.className = 'route-card';
+        route.innerHTML = `
+          <h3>${place.name}</h3>
+          <p>${place.note}</p>
+          <div class="route-actions">
+            <button class="btn ${index === 0 ? 'btn-primary' : 'btn-secondary'}" data-route-name="${place.name}" type="button">Hier anzeigen</button>
+            <a class="btn btn-secondary" target="_blank" rel="noopener noreferrer" href="${directionsUrl(place.destination)}">Route starten</a>
+          </div>
+        `;
+        route.querySelector('button').addEventListener('click', () => setRoute(place));
+        routeList.appendChild(route);
+      }
+    });
+
+    if (places.length) {
+      setRoute(places[0]);
+    }
+  </script>
+
+</body>
+</html>
