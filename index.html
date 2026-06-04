@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html=device-width, initial-scale=1, viewport-fit=cover" /><html lang="de">
+<html lang="de">
+="UTF-8"><head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Familientreffen 2027</title>
-  <meta name="description" content="Familientreffen 2027 – ein besonderes Wochenende im Ruhrgebiets-Stil mit gemeinsamen Ausflügen, Unterkunft und Vorfreude." />
-  <meta name="theme-color" content="#101319" />
+  <meta name="description" content="Familientreffen 2027 – ein besonderes Wochenende im Ruhrgebiets-Stil mit gemeinsamen Ausflügen, Unterkunft und Vorfreude.">
+  <meta name="theme-color" content="#101319">
 
   <style>
     :root {
@@ -70,6 +72,10 @@
         linear-gradient(180deg, #0a0d12 0%, #10141a 45%, #0d1117 100%);
       min-height: 100vh;
       overflow-x: hidden;
+    }
+
+    body.no-scroll {
+      overflow: hidden;
     }
 
     img {
@@ -657,6 +663,11 @@
     .place-card {
       display: grid;
       min-height: 100%;
+      cursor: pointer;
+    }
+
+    .place-card .btn {
+      pointer-events: auto;
     }
 
     .place-media {
@@ -838,6 +849,132 @@
       transform: translateY(0);
     }
 
+    /* ========== AUSFLUGS-LIGHTBOX ========== */
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(4, 7, 11, 0.82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .lightbox.is-open {
+      display: flex;
+      animation: lightboxFade 0.25s ease;
+    }
+
+    @keyframes lightboxFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-dialog {
+      position: relative;
+      width: min(100%, 980px);
+      max-height: min(92vh, 900px);
+      overflow: auto;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(20, 24, 31, 0.96), rgba(13, 17, 23, 0.98));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.45);
+      animation: lightboxUp 0.28s ease;
+    }
+
+    @keyframes lightboxUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(10,12,16,0.75);
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      transition: 0.2s ease;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-close:focus-visible {
+      background: rgba(255,255,255,0.12);
+      outline: none;
+    }
+
+    .lightbox-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .lightbox-image-wrap {
+      position: relative;
+      background: #0f141b;
+    }
+
+    .lightbox-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 58vh;
+      object-fit: cover;
+    }
+
+    .lightbox-body {
+      padding: 24px;
+    }
+
+    .lightbox-title {
+      margin: 0 0 10px;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .lightbox-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .lightbox-text {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    .lightbox-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .lightbox-actions .btn {
+      width: 100%;
+    }
+
     @media (min-width: 620px) {
       .countdown-grid {
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -938,6 +1075,28 @@
       @keyframes bounce {
         0%, 100% { transform: translateX(-50%) translateY(0); }
         50% { transform: translateX(-50%) translateY(8px); }
+      }
+
+      .lightbox-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        min-height: 560px;
+      }
+
+      .lightbox-image {
+        height: 100%;
+        max-height: none;
+        min-height: 560px;
+      }
+
+      .lightbox-body {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .lightbox-actions .btn {
+        width: auto;
       }
     }
 
@@ -1256,6 +1415,38 @@
     </nav>
   </div>
 
+  <!-- Lightbox für Ausflugsorte -->
+  <div class="lightbox" id="placeLightbox" aria-hidden="true">
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Schließen">✕</button>
+
+      <div class="lightbox-grid">
+        <div class="lightbox-image-wrap">
+          <img class="lightbox-image" id="lightboxImage" src="" alt="">
+        </div>
+
+        <div class="lightbox-body">
+          <h3 class="lightbox-title" id="lightboxTitle"></h3>
+
+          <div class="lightbox-meta" id="lightboxMeta"></div>
+
+          <p class="lightbox-text" id="lightboxText"></p>
+
+          <div class="lightbox-actions">
+            <a
+              class="btn btn-secondary"
+              id="lightboxDirections"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="#">
+              Navigation öffnen
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const accommodationAddress = 'Sonsbecker Straße 40, 47627 Kevelaer-Kervendonk';
 
@@ -1368,6 +1559,14 @@
 
     const placesGrid = document.getElementById('placesGrid');
     const filterRow = document.getElementById('filterRow');
+    const lightbox = document.getElementById('placeLightbox');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxMeta = document.getElementById('lightboxMeta');
+    const lightboxText = document.getElementById('lightboxText');
+    const lightboxDirections = document.getElementById('lightboxDirections');
+
     let activeFilter = 'Alle';
 
     function directionsUrl(destination) {
@@ -1417,13 +1616,35 @@
       });
     }
 
+    function openLightbox(place) {
+      lightboxImage.src = place.image;
+      lightboxImage.alt = place.name;
+      lightboxTitle.textContent = place.name;
+      lightboxText.textContent = place.note;
+      lightboxMeta.innerHTML = `
+        <span class="tag">${place.city}</span>
+        <span class="tag">${place.type}</span>
+      `;
+      lightboxDirections.href = directionsUrl(place.destination);
+
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('no-scroll');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
+    }
+
     function renderPlaces() {
       const visiblePlaces = activeFilter === 'Alle'
         ? places
         : places.filter(place => place.type === activeFilter);
 
-      placesGrid.innerHTML = visiblePlaces.map(place => `
-        <article class="card place-card" data-reveal>
+      placesGrid.innerHTML = visiblePlaces.map((place, index) => `
+        <article class="card place-card" data-reveal data-place-index="${index}" tabindex="0" role="button" aria-label="${place.name} groß anzeigen">
           <div class="place-media">
             <img src="${place.image}" alt="${place.name}" loading="lazy" decoding="async">
           </div>
@@ -1451,6 +1672,22 @@
           </div>
         </article>
       `).join('');
+
+      placesGrid.querySelectorAll('.place-card').forEach((card, index) => {
+        const place = visiblePlaces[index];
+
+        card.addEventListener('click', (event) => {
+          if (event.target.closest('.btn')) return;
+          openLightbox(place);
+        });
+
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openLightbox(place);
+          }
+        });
+      });
 
       revealElements();
     }
@@ -1506,6 +1743,20 @@
       sections.forEach(section => observer.observe(section));
     }
 
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && lightbox.classList.contains('is-open')) {
+        closeLightbox();
+      }
+    });
+
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
@@ -1516,6 +1767,3 @@
   </script>
 </body>
 </html>
-``
-<head>
-  <meta charset="UTF-8" />
