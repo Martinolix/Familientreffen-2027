@@ -401,8 +401,7 @@
     }
 
     .info-grid,
-    .places-grid,
-    .route-grid {
+    .places-grid {
       display: grid;
       gap: 20px;
     }
@@ -414,11 +413,6 @@
     .places-grid {
       grid-template-columns: repeat(3, 1fr);
       align-items: stretch;
-    }
-
-    .route-grid {
-      grid-template-columns: 1.1fr .9fr;
-      align-items: start;
     }
 
     .card {
@@ -441,16 +435,13 @@
     }
 
     .info-card h3,
-    .place-card h3,
-    .route-card h3 {
+    .place-card h3 {
       margin: 0 0 10px;
       font-size: 1.18rem;
     }
 
     .info-card p,
-    .place-card p,
-    .route-card p,
-    .route-summary p {
+    .place-card p {
       margin: 0;
       color: var(--muted);
       line-height: 1.7;
@@ -512,53 +503,8 @@
       margin-top: auto;
     }
 
-    .place-actions .btn,
-    .route-card .btn {
+    .place-actions .btn {
       width: 100%;
-    }
-
-    .route-map {
-      padding: 22px;
-      min-height: 540px;
-    }
-
-    .route-list {
-      display: grid;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .route-card {
-      padding: 18px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease;
-    }
-
-    .route-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(216,179,138,.20);
-      box-shadow: 0 18px 35px rgba(0,0,0,.28);
-    }
-
-    .route-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .route-actions .btn {
-      flex: 1 1 160px;
-    }
-
-    iframe.route-frame {
-      width: 100%;
-      height: 520px;
-      border: 0;
-      border-radius: 24px;
-      background: #0d1218;
     }
 
     /* Unterkunft-Bildzeile */
@@ -779,8 +725,7 @@
       }
 
       .info-card p,
-      .place-card p,
-      .route-card p {
+      .place-card p {
         line-height: 1.8;
       }
 
@@ -814,12 +759,10 @@
         font-size: 2.35rem;
       }
 
-      .place-actions,
-      .route-actions {
+      .place-actions {
         gap: 14px;
       }
 
-      .route-actions .btn,
       .place-actions .btn {
         width: 100%;
         flex: 1 1 100%;
@@ -1096,14 +1039,6 @@
     </div>
   </section>
 
-  <!-- ROUTEN -->
-  <section class="content-section" id="routen">
-    <div class="container route-grid">
-      <div>
-      </div>
-    </div>
-  </section>
-
   <footer>
     <div class="container">
       <p style="margin:0;">
@@ -1254,33 +1189,12 @@
     ];
 
     const placesGrid = document.getElementById('placesGrid');
-    const routeList = document.getElementById('routeList');
-    const routeFrame = document.getElementById('routeFrame');
-    const routeSummary = document.getElementById('routeSummary');
-
-    function mapEmbedUrl(destination) {
-      return `https://maps.google.com/maps?q=${encodeURIComponent(destination)}&output=embed`;
-    }
 
     function directionsUrl(destination) {
-      return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(accommodation.address)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+      return `https://www.google.com/maps/dir/?api=1&amp;origin=${encodeURIComponent(accommodation.address)}&amp;destination=${encodeURIComponent(destination)}&amp;travelmode=driving`;
     }
 
-    function setRoute(place) {
-      if (routeFrame) {
-        routeFrame.src = mapEmbedUrl(place.destination);
-      }
-      if (routeSummary) {
-        routeSummary.innerHTML = `Aktuell ausgewählt: <strong>${place.name}</strong> ab <strong>${accommodation.name}</strong>.`;
-      }
-
-      document.querySelectorAll('[data-route-name]').forEach(btn => {
-        btn.classList.toggle('btn-primary', btn.dataset.routeName === place.name);
-        btn.classList.toggle('btn-secondary', btn.dataset.routeName !== place.name);
-      });
-    }
-
-    places.forEach((place, index) => {
+    places.forEach((place) => {
       const card = document.createElement('article');
       card.className = 'card place-card';
       card.innerHTML = `
@@ -1300,26 +1214,7 @@
         </div>
       `;
       placesGrid.appendChild(card);
-
-      if (routeList) {
-        const route = document.createElement('article');
-        route.className = 'route-card';
-        route.innerHTML = `
-          <h3>${place.name}</h3>
-          <p>${place.note}</p>
-          <div class="route-actions">
-            <button class="btn ${index === 0 ? 'btn-primary' : 'btn-secondary'}" data-route-name="${place.name}" type="button">Hier anzeigen</button>
-            <a class="btn btn-secondary" target="_blank" rel="noopener noreferrer" href="${directionsUrl(place.destination)}">Route starten</a>
-          </div>
-        `;
-        route.querySelector('button').addEventListener('click', () => setRoute(place));
-        routeList.appendChild(route);
-      }
     });
-
-    if (places.length) {
-      setRoute(places[0]);
-    }
   </script>
 
 </body>
