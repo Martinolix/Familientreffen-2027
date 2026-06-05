@@ -855,7 +855,7 @@
       position: absolute;
       top: 14px;
       right: 14px;
-      z-index: 3;
+      z-index: 5;
       width: 46px;
       height: 46px;
       border: 1px solid rgba(255,255,255,0.14);
@@ -873,6 +873,43 @@
     .lightbox-close:focus-visible {
       background: rgba(255,255,255,0.12);
       outline: none;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      background: rgba(10,12,16,0.72);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: 0.2s ease;
+    }
+
+    .lightbox-nav:hover,
+    .lightbox-nav:focus-visible {
+      background: rgba(255,255,255,0.14);
+      outline: none;
+    }
+
+    .lightbox-nav.is-disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .lightbox-prev {
+      left: 14px;
+    }
+
+    .lightbox-next {
+      right: 14px;
     }
 
     .lightbox-grid {
@@ -941,6 +978,22 @@
       .info-grid,
       .places-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .lightbox-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+      }
+
+      .lightbox-prev {
+        left: 10px;
+      }
+
+      .lightbox-next {
+        right: 10px;
       }
     }
 
@@ -1346,6 +1399,8 @@
   <div class="lightbox" id="placeLightbox" aria-hidden="true">
     <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
       <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Schließen">✕</button>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Vorheriger Ort">‹</button>
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Nächster Ort">›</button>
 
       <div class="lightbox-grid">
         <div class="lightbox-image-wrap">
@@ -1495,6 +1550,8 @@
     const lightboxText = document.getElementById('lightboxText');
     const lightboxDirections = document.getElementById('lightboxDirections');
     const lightboxDialog = document.querySelector('.lightbox-dialog');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
 
     let activeFilter = 'Alle';
 
@@ -1551,6 +1608,14 @@
       });
     }
 
+    function updateLightboxNavButtons() {
+      const isAtStart = currentLightboxIndex <= 0;
+      const isAtEnd = currentLightboxIndex >= currentLightboxPlaces.length - 1;
+
+      lightboxPrev.classList.toggle('is-disabled', isAtStart);
+      lightboxNext.classList.toggle('is-disabled', isAtEnd);
+    }
+
     function openLightbox(place, visiblePlaces = places, index = 0) {
       currentLightboxPlaces = visiblePlaces;
       currentLightboxIndex = index;
@@ -1564,6 +1629,8 @@
         <span class="tag">${place.type}</span>
       `;
       lightboxDirections.href = directionsUrl(place.destination);
+
+      updateLightboxNavButtons();
 
       lightbox.classList.add('is-open');
       lightbox.setAttribute('aria-hidden', 'false');
@@ -1586,6 +1653,8 @@
         <span class="tag">${place.type}</span>
       `;
       lightboxDirections.href = directionsUrl(place.destination);
+
+      updateLightboxNavButtons();
     }
 
     function closeLightbox() {
@@ -1676,6 +1745,14 @@
     }
 
     lightboxClose.addEventListener('click', closeLightbox);
+
+    lightboxPrev.addEventListener('click', () => {
+      goToLightboxPlace(currentLightboxIndex - 1);
+    });
+
+    lightboxNext.addEventListener('click', () => {
+      goToLightboxPlace(currentLightboxIndex + 1);
+    });
 
     lightbox.addEventListener('click', (event) => {
       if (event.target === lightbox) {
