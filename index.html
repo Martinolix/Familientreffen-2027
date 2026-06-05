@@ -1784,7 +1784,7 @@
         <div class="container hero-inner">
           <div class="hero-grid">
             <div class="hero-copy" data-reveal>
-              <div class="eyebrow">✨ GLÜCK AUF!</div>
+              <div class="eyebrow" id="glueckAuf">✨ GLÜCK AUF!</div>
               <h1>Familientreffen 2027</h1>
               <div class="slogan">„Einfach mal Pott fühlen.“</div>
 
@@ -2165,6 +2165,11 @@
   <button class="back-to-top" id="backToTop" type="button" aria-label="Zurück nach oben">
     ↑
   </button>
+
+
+<audio id="steigerlied" preload="auto">
+  <source src="https://archive.org/download/gluck-auf-der-steiger/Gl%C3%BCck%20auf%20der%20Steiger.wav" type="audio/wav">
+</audio>
 
   <script>
     const accommodationAddress = 'Sonsbecker Straße 40, 47627 Kevelaer-Kervendonk';
@@ -3036,6 +3041,39 @@ visiblePlaces.sort((a, b) => {
     } else {
       window.addEventListener('load', hydrateHeroSlides, { once: true });
     }
+
+
+
+
+const steigerlied = document.getElementById('steigerlied');
+const glueckAuf = document.getElementById('glueckAuf');
+
+if (steigerlied && glueckAuf) {
+
+  glueckAuf.style.cursor = "pointer";
+
+  glueckAuf.addEventListener('click', () => {
+
+    if (!steigerlied.paused) {
+      // 🔴 Musik läuft → stoppen
+      steigerlied.pause();
+      steigerlied.currentTime = 0;
+    } else {
+      // 🟢 Musik ist aus → starten
+      steigerlied.volume = 0.5;
+      steigerlied.play().catch(() => {});
+    }
+
+  });
+
+}
+
+
   </script>
+
+
+
+
+
 </body>
 </html>
