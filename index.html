@@ -1061,6 +1061,121 @@
       pointer-events: auto;
     }
 
+    /* Events */
+    .events-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .event-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: var(--shadow-md);
+      padding: 22px 20px 20px;
+      transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+      content-visibility: auto;
+      contain-intrinsic-size: 280px;
+    }
+
+    .event-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      opacity: 0.9;
+    }
+
+    .event-card:hover,
+    .event-card:focus-within {
+      transform: translateY(-4px);
+      border-color: rgba(216,179,138,0.26);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .event-highlight {
+      background:
+        radial-gradient(circle at top right, rgba(216,179,138,0.14), transparent 28%),
+        linear-gradient(145deg, rgba(181,83,47,0.18), rgba(216,179,138,0.08));
+      border-color: rgba(216,179,138,0.28);
+    }
+
+    .event-topline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .event-badge,
+    .event-date {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 7px 11px;
+      border-radius: var(--radius-pill);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .event-badge {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+
+    .event-date {
+      background: rgba(216,179,138,0.10);
+      color: var(--accent-2);
+      border-color: rgba(216,179,138,0.24);
+    }
+
+    .event-title-row {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .event-title-row h3 {
+      margin: 0;
+      font-size: clamp(1.15rem, 4vw, 1.6rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    .event-location {
+      color: var(--muted-2);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .event-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .event-footer {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .event-mini-note {
+      margin-top: 14px;
+      color: var(--muted-2);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
     .gallery-wrap {
       display: grid;
       gap: 18px;
@@ -1436,8 +1551,9 @@
       .lightbox-prev { left: 10px; }
       .lightbox-next { right: 10px; }
 
-      .gallery-thumbs {
-        grid-template-columns: repeat(2, 1fr);
+      .gallery-thumbs,
+      .events-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1495,6 +1611,14 @@
 
       .places-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .events-grid {
+        grid-template-columns: 1.15fr 0.85fr 0.85fr;
+      }
+
+      .event-highlight {
+        min-height: 100%;
       }
 
       .gallery-thumbs {
@@ -1607,6 +1731,7 @@
           <a class="nav-link" href="#countdown" data-nav-link="countdown">Countdown</a>
           <a class="nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick</a>
           <a class="nav-link" href="#orte" data-nav-link="orte">Orte</a>
+          <a class="nav-link" href="#events" data-nav-link="events">Events</a>
           <a class="nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft</a>
         </nav>
 
@@ -1642,6 +1767,7 @@
         <a class="mobile-nav-link" href="#countdown" data-nav-link="countdown">Countdown <span aria-hidden="true">→</span></a>
         <a class="mobile-nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick <span aria-hidden="true">→</span></a>
         <a class="mobile-nav-link" href="#orte" data-nav-link="orte">Orte <span aria-hidden="true">→</span></a>
+        <a class="mobile-nav-link" href="#events" data-nav-link="events">Events <span aria-hidden="true">→</span></a>
         <a class="mobile-nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft <span aria-hidden="true">→</span></a>
       </nav>
     </aside>
@@ -1680,7 +1806,7 @@
 
               <div class="meta-grid">
                 <div class="meta-item">
-                  <span class="meta-label">Zeitraum</span>
+                  <span class="meta-label">Events</span>
                   <div class="meta-value">06.05.2027 – 09.05.2027</div>
                 </div>
 
@@ -1801,6 +1927,113 @@
           </div>
 
           <div class="places-grid" id="placesGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section" id="events">
+        <div class="container">
+          <div class="section-head" data-reveal>
+            <span class="section-kicker">Zeitraum</span>
+            <h2>Veranstaltungen im Mai</h2>
+            <p>
+              Rund um unser Treffen gibt es in der Umgebung einige Möglichkeiten für spontane gemeinsame Momente –
+              von Kirmesstimmung bis zu kleineren Events in der Region.
+            </p>
+          </div>
+
+          <div class="events-grid">
+            <article class="event-card event-highlight" data-reveal>
+              <div class="event-topline">
+                <span class="event-badge">Highlight im Reisezeitraum</span>
+                <span class="event-date">06.–10.05.2027</span>
+              </div>
+
+              <div class="event-title-row">
+                <h3>Kevelaerer Kirmes</h3>
+                <span class="event-location">Kevelaer</span>
+              </div>
+
+              <p class="event-copy">
+                Die Kirmes fällt genau in unser Wochenende und bringt typische Jahrmarktstimmung
+                direkt in die Nähe der Unterkunft – mit Fahrgeschäften, Essen und lebendiger Atmosphäre.
+              </p>
+
+              <div class="event-footer">
+                <a
+                  class="btn btn-secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=Kevelaer+Kirmes">
+                  Ort anzeigen
+                </a>
+
+                <a
+                  class="btn btn-secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://kevelaer-marketing.de/veranstaltungskalender/">
+                  Eventkalender ansehen
+                </a>
+              </div>
+
+              <p class="event-mini-note">
+                Ideal als spontaner Programmpunkt, wenn wir Lust auf etwas Trubel, Essenbuden
+                und klassische Kirmesstimmung haben.
+              </p>
+            </article>
+
+            <article class="event-card" data-reveal>
+              <div class="event-topline">
+                <span class="event-badge">flexibel</span>
+              </div>
+
+              <div class="event-title-row">
+                <h3>Weitere Events im Umland</h3>
+                <span class="event-location">Niederrhein &amp; Umgebung</span>
+              </div>
+
+              <p class="event-copy">
+                Im Umland finden regelmäßig kleinere Feste, Märkte und regionale Veranstaltungen statt.
+                Wer möchte, kann spontan schauen, was sich in der Nähe gerade anbietet.
+              </p>
+
+              <div class="event-footer">
+                <a
+                  class="btn btn-secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.niederrhein.de/events-am-niederrhein/veranstaltungskalender-am-niederrhein">
+                  Regionale Termine
+                </a>
+              </div>
+            </article>
+
+            <article class="event-card" data-reveal>
+              <div class="event-topline">
+                <span class="event-badge">optional</span>
+              </div>
+
+              <div class="event-title-row">
+                <h3>Konzerte &amp; Indoor-Events</h3>
+                <span class="event-location">Kevelaer &amp; Umgebung</span>
+              </div>
+
+              <p class="event-copy">
+                Je nach Lust und Wetter können Konzerte, kleinere Bühnenveranstaltungen oder spontane Abendprogramme
+                eine entspannte Ergänzung zum Wochenende sein.
+              </p>
+
+              <div class="event-footer">
+                <a
+                  class="btn btn-secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://kevelaer-marketing.de/veranstaltungskalender/">
+                  Lokale Termine
+                </a>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -2063,7 +2296,7 @@
       },
       {
         title: 'Außenansicht Rückseite',
-        description: 'Ein weiterer Blick von der Rückseite',
+        description: 'Ein weiterer Blick von der Rückseite.',
         image: 'https://www.gruppenunterkuenfte.de/img-webp/n513x342/Altes-Pastorat-Rouenhof-__t13397i.webp',
         alt: 'Rückansicht des Alten Pastorats',
         meta: ['Unterkunft', 'Außenbereich']
@@ -2699,3 +2932,4 @@
   </script>
 </body>
 </html>
+``
