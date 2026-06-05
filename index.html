@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Familientreffen 2027</title>
-
   <meta name="description" content="Familientreffen 2027 – ein besonderes Wochenende im Ruhrgebiets-Stil mit gemeinsamen Ausflügen, Unterkunft und Vorfreude.">
   <meta name="theme-color" content="#101319">
 
@@ -490,8 +489,6 @@
       background: linear-gradient(145deg, rgba(181,83,47,0.20), rgba(216,179,138,0.10));
       border-color: rgba(216,179,138,0.28);
     }
-
-    
 
     .hero {
       position: relative;
@@ -1069,81 +1066,9 @@
       gap: 18px;
     }
 
-    .gallery-hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow-lg);
-      aspect-ratio: 16 / 9;
-    }
-
-    .gallery-hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.45s ease, filter 0.45s ease;
-      filter: saturate(0.96) contrast(1.02);
-    }
-
-    .gallery-hero:hover img {
-      transform: scale(1.03);
-      filter: brightness(1.03);
-    }
-
-    .gallery-hero-button {
-      width: 100%;
-      height: 100%;
-      display: block;
-      border: 0;
-      padding: 0;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .gallery-hero-button:focus-visible {
-      outline: 2px solid rgba(216,179,138,0.9);
-      outline-offset: -2px;
-    }
-
-    .gallery-hero-caption {
-      position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 18px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: end;
-      justify-content: space-between;
-      padding: 16px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(10,12,16,0.24), rgba(10,12,16,0.72));
-      border: 1px solid rgba(255,255,255,0.10);
-      backdrop-filter: blur(10px);
-    }
-
-    .gallery-hero-copy {
-      max-width: 56ch;
-    }
-
-    .gallery-hero-title {
-      margin: 0;
-      font-size: 1.06rem;
-      font-weight: 800;
-    }
-
-    .gallery-hero-text {
-      margin: 6px 0 0;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 0.94rem;
-    }
-
     .gallery-thumbs {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
 
@@ -1166,11 +1091,6 @@
       transform: translateY(-2px);
       border-color: rgba(216,179,138,0.28);
       outline: none;
-    }
-
-    .thumb-button.is-active {
-      border-color: rgba(216,179,138,0.36);
-      box-shadow: 0 0 0 1px rgba(216,179,138,0.18), var(--shadow-md);
     }
 
     .thumb-button img {
@@ -1526,7 +1446,7 @@
       }
 
       .gallery-thumbs {
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
 
       .address-wrap {
@@ -1668,8 +1588,6 @@
         <a class="mobile-nav-link" href="#orte" data-nav-link="orte">Orte <span aria-hidden="true">→</span></a>
         <a class="mobile-nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft <span aria-hidden="true">→</span></a>
       </nav>
-
-      
     </aside>
 
     <main id="main">
@@ -1842,29 +1760,6 @@
           </div>
 
           <div class="gallery-wrap" data-reveal>
-            <div class="gallery-hero">
-              <button
-                class="gallery-hero-button"
-                type="button"
-                id="galleryHeroButton"
-                aria-label="Unterkunftsbild groß anzeigen">
-                <img
-                  id="galleryHeroImage"
-                  src="https://imgservice.rentbyowner.com/680x408/das-alte-pastorat-de-kevelaer-bc-5415524-0.jpg"
-                  alt="Außenansicht des Alten Pastorats"
-                  decoding="async">
-                <div class="gallery-hero-caption">
-                  <div class="gallery-hero-copy">
-                    <h3 class="gallery-hero-title" id="galleryHeroTitle">Außenansicht</h3>
-                    <p class="gallery-hero-text" id="galleryHeroText">
-                      Ein erster Blick auf das Alte Pastorat – unser gemeinsamer Mittelpunkt für das Wochenende.
-                    </p>
-                  </div>
-                  <span class="tag">Galerie öffnen</span>
-                </div>
-              </button>
-            </div>
-
             <div class="gallery-thumbs" id="galleryThumbs" aria-label="Unterkunftsbilder Auswahl">
               <!-- wird per JS befüllt -->
             </div>
@@ -1913,15 +1808,13 @@
               </div>
 
               <div>
-                
-<a
-  class="btn btn-secondary"
-  target="_blank"
-  rel="noopener noreferrer"
-  href="https://www.google.com/maps/dir/?api=1&amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
-  In Google Maps öffnen
-</a>
-
+                <a
+                  class="btn btn-secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.google.com/maps/dir/?api=1&amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
+                  In Google Maps öffnen
+                </a>
               </div>
             </div>
           </div>
@@ -2149,11 +2042,6 @@
     const mobileNavLinks = mobileNav.querySelectorAll('a[data-nav-link]');
 
     const backToTop = document.getElementById('backToTop');
-
-    const galleryHeroButton = document.getElementById('galleryHeroButton');
-    const galleryHeroImage = document.getElementById('galleryHeroImage');
-    const galleryHeroTitle = document.getElementById('galleryHeroTitle');
-    const galleryHeroText = document.getElementById('galleryHeroText');
     const galleryThumbs = document.getElementById('galleryThumbs');
 
     const lightbox = document.getElementById('sharedLightbox');
@@ -2178,7 +2066,6 @@
     let touchStartY = 0;
     let currentLightboxItems = [];
     let currentLightboxIndex = -1;
-    let activeAccommodationIndex = 0;
 
     /* Filter UX State */
     let filterHintPlayed = false;
@@ -2226,11 +2113,9 @@
       }
     }
 
-    
-function directionsUrl(destination) {
-  return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(accommodationAddress)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
-}
-
+    function directionsUrl(destination) {
+      return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(accommodationAddress)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+    }
 
     function updateCountdown() {
       const targetDate = new Date(2027, 4, 6, 0, 0, 0).getTime();
@@ -2571,10 +2456,10 @@ function directionsUrl(destination) {
     function renderAccommodationThumbs() {
       galleryThumbs.innerHTML = accommodationGallery.map((item, index) => `
         <button
-          class="thumb-button ${index === activeAccommodationIndex ? 'is-active' : ''}"
+          class="thumb-button"
           type="button"
           data-thumb-index="${index}"
-          aria-label="${item.title} auswählen">
+          aria-label="${item.title} groß anzeigen">
           <img src="${item.image}" alt="${item.alt}" loading="lazy" decoding="async">
           <span class="thumb-label">${item.title}</span>
         </button>
@@ -2583,23 +2468,8 @@ function directionsUrl(destination) {
       galleryThumbs.querySelectorAll('[data-thumb-index]').forEach(button => {
         button.addEventListener('click', () => {
           const newIndex = Number(button.dataset.thumbIndex);
-          setActiveAccommodation(newIndex);
+          openLightbox(accommodationGallery, newIndex);
         });
-      });
-    }
-
-    function setActiveAccommodation(index) {
-      activeAccommodationIndex = index;
-      const item = accommodationGallery[activeAccommodationIndex];
-
-      galleryHeroImage.src = item.image;
-      galleryHeroImage.alt = item.alt;
-      galleryHeroTitle.textContent = item.title;
-      galleryHeroText.textContent = item.description;
-
-      galleryThumbs.querySelectorAll('[data-thumb-index]').forEach(button => {
-        const isActive = Number(button.dataset.thumbIndex) === activeAccommodationIndex;
-        button.classList.toggle('is-active', isActive);
       });
     }
 
@@ -2672,10 +2542,6 @@ function directionsUrl(destination) {
 
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    galleryHeroButton.addEventListener('click', () => {
-      openLightbox(accommodationGallery, activeAccommodationIndex);
     });
 
     lightboxClose.addEventListener('click', closeLightbox);
@@ -2756,7 +2622,6 @@ function directionsUrl(destination) {
     renderFilters();
     renderPlaces();
     renderAccommodationThumbs();
-    setActiveAccommodation(0);
     revealElements();
     requestScrollTick();
 
