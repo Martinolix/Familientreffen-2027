@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -1914,13 +1913,15 @@
               </div>
 
               <div>
-                <a
-                  class="btn btn-secondary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.google.com/maps/dir/?api=1&amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
-                  In Google Maps öffnen
-                </a>
+                
+<a
+  class="btn btn-secondary"
+  target="_blank"
+  rel="noopener noreferrer"
+  href="https://www.google.com/maps/dir/?api=1&amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
+  In Google Maps öffnen
+</a>
+
               </div>
             </div>
           </div>
@@ -2225,9 +2226,11 @@
       }
     }
 
-    function directionsUrl(destination) {
-      return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(accommodationAddress)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
-    }
+    
+function directionsUrl(destination) {
+  return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(accommodationAddress)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+}
+
 
     function updateCountdown() {
       const targetDate = new Date(2027, 4, 6, 0, 0, 0).getTime();
