@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
+><html lang="de">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Familientreffen 2027</title>
@@ -874,7 +873,7 @@
       margin-bottom: 18px;
     }
 
-    /* ===== Premium Filter UX ===== */
+    /* Premium Filter UX */
     .filter-scroll-shell {
       position: relative;
       overflow: hidden;
@@ -978,7 +977,6 @@
       75%  { opacity: 1; transform: translateX(0); }
       100% { opacity: 1; transform: translateX(0); }
     }
-    /* ===== Ende Premium Filter UX ===== */
 
     .places-grid {
       display: grid;
@@ -1622,13 +1620,13 @@
   </style>
 </head>
 <body>
-  #mainZum Inhalt springen</a>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
   <div class="progress-bar" aria-hidden="true"></div>
 
   <div class="page-shell">
     <header class="header">
       <div class="container header-inner">
-        #top
+        <a class="brand" href="#top" aria-label="Zurück zum Seitenanfang">
           <div class="brand-badge" aria-hidden="true">FT</div>
           <div class="brand-text">
             <div class="brand-title">Familientreffen 2027</div>
@@ -1637,10 +1635,10 @@
         </a>
 
         <nav class="nav-inline" aria-label="Hauptnavigation">
-          #countdownCountdown</a>
-          #ueberblickÜberblick</a>
-          #orteOrte</a>
-          #unterkunftUnterkunft</a>
+          <a class="nav-link" href="#countdown" data-nav-link="countdown">Countdown</a>
+          <a class="nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick</a>
+          <a class="nav-link" href="#orte" data-nav-link="orte">Orte</a>
+          <a class="nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft</a>
         </nav>
 
         <button
@@ -1672,10 +1670,10 @@
       </div>
 
       <nav class="mobile-nav-links" aria-label="Mobile Navigation">
-        #countdownCountdown <span aria-hidden="true">→</span></a>
-        #ueberblickÜberblick <span aria-hidden="true">→</span></a>
-        #orteOrte <span aria-hidden="true">→</span></a>
-        #unterkunftUnterkunft <span aria-hidden="true">→</span></a>
+        <a class="mobile-nav-link" href="#countdown" data-nav-link="countdown">Countdown <span aria-hidden="true">→</span></a>
+        <a class="mobile-nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick <span aria-hidden="true">→</span></a>
+        <a class="mobile-nav-link" href="#orte" data-nav-link="orte">Orte <span aria-hidden="true">→</span></a>
+        <a class="mobile-nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft <span aria-hidden="true">→</span></a>
       </nav>
 
       <div class="mobile-nav-note">
@@ -1703,8 +1701,8 @@
               </p>
 
               <div class="hero-actions">
-                #orteOrte entdecken</a>
-                #unterkunftZur Unterkunft</a>
+                <a class="btn btn-primary" href="#orte">Orte entdecken</a>
+                <a class="btn btn-secondary" href="#unterkunft">Zur Unterkunft</a>
               </div>
             </div>
 
@@ -1740,7 +1738,7 @@
           </div>
         </div>
 
-        #countdown↓</a>
+        <a class="scroll-cue" href="#countdown" aria-label="Zum Countdown springen">↓</a>
       </section>
 
       <section class="section" id="countdown">
@@ -1962,7 +1960,7 @@
 
       <div class="lightbox-grid">
         <div class="lightbox-image-wrap">
-          
+          <img class="lightbox-image" id="lightboxImage" src="" alt="">
         </div>
 
         <div class="lightbox-body">
@@ -1971,7 +1969,12 @@
           <p class="lightbox-text" id="lightboxText"></p>
 
           <div class="lightbox-actions">
-            #
+            <a
+              class="btn btn-secondary is-hidden"
+              id="lightboxDirections"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="#">
               Navigation öffnen
             </a>
           </div>
@@ -2184,12 +2187,11 @@
     let currentLightboxIndex = -1;
     let activeAccommodationIndex = 0;
 
-    /* ===== Filter UX State ===== */
+    /* Filter UX State */
     let filterHintPlayed = false;
     let isFilterDragging = false;
     let filterDragStartX = 0;
     let filterScrollStart = 0;
-    /* ===== Ende Filter UX State ===== */
 
     const scrollLocks = new Set();
 
@@ -2204,7 +2206,7 @@
 
     function getFocusableElements(container) {
       return [...container.querySelectorAll(
-        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), not([tabindex="-1"])'
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
       )].filter(el => {
         return !el.hasAttribute('hidden') &&
                el.getAttribute('aria-hidden') !== 'true' &&
@@ -2284,7 +2286,7 @@
       requestAnimationFrame(updateFilterOverflowState);
     }
 
-    /* ===== Premium Filter UX ===== */
+    /* Premium Filter UX */
     function updateFilterOverflowState() {
       if (!filterRow || !filterShell) return;
 
@@ -2368,7 +2370,6 @@
       updateFilterOverflowState();
       playFilterHintIfNeeded();
     }
-    /* ===== Ende Premium Filter UX ===== */
 
     const revealObserver = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       ? null
