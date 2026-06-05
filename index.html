@@ -1787,7 +1787,6 @@
               <div class="eyebrow">✨ GLÜCK AUF!</div>
               <h1>Familientreffen 2027</h1>
               <div class="slogan">„Einfach mal Pott fühlen.“</div>
-              
 
               <div class="hero-actions">
                 <a class="btn btn-primary" href="#orte">Orte entdecken</a>
@@ -2169,6 +2168,7 @@
 
   <script>
     const accommodationAddress = 'Sonsbecker Straße 40, 47627 Kevelaer-Kervendonk';
+    const accommodationCoords = [51.6049, 6.2521];
 
     const places = [
       {
@@ -2177,7 +2177,8 @@
         type: 'Park',
         note: 'Große Grünanlage mit viel Platz für gemeinsame Zeit.',
         image: 'https://res.cloudinary.com/adactrips/image/fetch/f_auto,q_auto,w_1200,h_630,c_fill/https://adac.imxplatform.de/data/images/Essen_Grugapark_84914507_c_imago_images%2BRupert_Oberhaeuser.jpg',
-        destination: 'Grugapark Essen'
+        destination: 'Grugapark Essen',
+        coords: [51.4269, 7.0017]
       },
       {
         name: 'Baldeneysee',
@@ -2185,7 +2186,8 @@
         type: 'See',
         note: 'Spaziergang, Sonnenuntergang und Ruhe am Wasser.',
         image: 'https://media.essen.de/media/emg_1/essen_tourismus/bilder_neu_1/startseite_6/Baldeneysee_FV_gef_Val_1024_16zu9.jpg',
-        destination: 'Baldeneysee'
+        destination: 'Baldeneysee',
+        coords: [51.4014, 7.0508]
       },
       {
         name: 'Zeche Zollverein',
@@ -2193,7 +2195,8 @@
         type: 'Kultur',
         note: 'UNESCO-Welterbe mit beeindruckender Industriearchitektur.',
         image: 'https://media.essen.de/media/histiorisches_portal/historischesportal_bilder/bergbau_1/zeche_zollverein_2/JochenTack-ZV-140903-011_speziell_0900_0700_sv.jpg',
-        destination: 'Zeche Zollverein'
+        destination: 'Zeche Zollverein',
+        coords: [51.4913, 7.0415]
       },
       {
         name: 'Schloss Broich',
@@ -2201,7 +2204,8 @@
         type: 'Schloss',
         note: 'Historische Burganlage, perfekt für einen entspannten Ausflug.',
         image: 'https://images.pexels.com/photos/33128431/pexels-photo-33128431/free-photo-of-historic-schloss-broich-in-mulheim-germany.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        destination: 'Schloss Broich Mülheim'
+        destination: 'Schloss Broich Mülheim',
+        coords: [51.4286, 6.8725]
       },
       {
         name: 'Kaisergarten & Tierpark Oberhausen',
@@ -2209,7 +2213,8 @@
         type: 'Zoo',
         note: 'Familienfreundlich mit Tierpark und viel Grün.',
         image: 'https://www.oberhausen-tourismus.de/wp-content/uploads/2024/01/DSC9023-scaled.jpeg',
-        destination: 'Kaisergarten Oberhausen'
+        destination: 'Kaisergarten Oberhausen',
+        coords: [51.5002, 6.8635]
       },
       {
         name: 'Tiger & Turtle – Magic Mountain',
@@ -2217,7 +2222,8 @@
         type: 'Sehenswürdigkeit',
         note: 'Ein markanter Ort mit starkem Wow-Effekt.',
         image: 'https://www.rvr.ruhr/fileadmin/_processed_/4/f/csm_Tiger_and_Turtle_Magic_Mountain_RVR_Stefan_Ziese_82ea7970b3.jpg',
-        destination: 'Tiger and Turtle Duisburg'
+        destination: 'Tiger and Turtle Duisburg',
+        coords: [51.3837, 6.7834]
       },
       {
         name: 'Landschaftspark Duisburg-Nord',
@@ -2225,7 +2231,8 @@
         type: 'Kultur',
         note: 'Industriekultur, Aussicht und viel Platz zum Entdecken – tagsüber und abends besonders spannend.',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Landschaftspark-Duisburg-Nord_Hochofen_Panorama.jpg/1280px-Landschaftspark-Duisburg-Nord_Hochofen_Panorama.jpg',
-        destination: 'Landschaftspark Duisburg-Nord'
+        destination: 'Landschaftspark Duisburg-Nord',
+        coords: [51.4818, 6.7620]
       },
       {
         name: 'Freizeitpark Schloss Beck',
@@ -2233,7 +2240,8 @@
         type: 'Freizeitpark',
         note: 'Familienfreundlicher Freizeitpark mit Fahrgeschäften, Spielplätzen und viel Grün.',
         image: 'https://media-cdn.tripadvisor.com/media/photo-o/09/94/85/47/freizeitpark-schloss.jpg',
-        destination: 'Freizeitpark Schloss Beck'
+        destination: 'Freizeitpark Schloss Beck',
+        coords: [51.6158, 6.9958]
       },
       {
         name: 'Irrland',
@@ -2241,7 +2249,8 @@
         type: 'Freizeitpark',
         note: 'Freizeitpark für Familien mit Kindern – mit vielen Attraktionen zum Toben, Spielen und Entdecken.',
         image: 'https://www.golocal.de/media/9451677319b5dfa6017d06f7b2d1dd8d/700/de863ed4af48edf4.JPG',
-        destination: 'Irrland Kevelaer'
+        destination: 'Irrland Kevelaer',
+        coords: [51.5416, 6.2493]
       },
       {
         name: 'Nordsternpark',
@@ -2249,7 +2258,8 @@
         type: 'Park',
         note: 'Großer Landschaftspark auf ehemaligem Zechengelände mit Industriekultur, Aussichtspunkten und viel Grün zum Entspannen.',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Gelsenkirchen_-_Nordsternpark_-_Kohlenbunker%2BBandbr%C3%BCcke%2BKohlenmischanlage_%28Pyramide%29_03_ies.jpg/1280px-Gelsenkirchen_-_Nordsternpark_-_Kohlenbunker%2BBandbr%C3%BCcke%2BKohlenmischanlage_%28Pyramide%29_03_ies.jpg',
-        destination: 'Nordsternpark Gelsenkirchen'
+        destination: 'Nordsternpark Gelsenkirchen',
+        coords: [51.5393, 7.0677]
       },
       {
         name: 'Archäologischer Park Xanten',
@@ -2257,7 +2267,8 @@
         type: 'Museum',
         note: 'Großes Freilichtmuseum auf dem Gelände einer römischen Stadt mit rekonstruierten Gebäuden, Amphitheater und Römermuseum.',
         image: 'https://www.deutschlandmalanders.com/wp-content/uploads/2020/04/Arch%C3%A4ologischer-Park-Xanten-2-1068x712.jpg',
-        destination: 'APX Xanten'
+        destination: 'APX Xanten',
+        coords: [51.6645, 6.4475]
       },
       {
         name: 'Schloss Moyland',
@@ -2265,7 +2276,8 @@
         type: 'Schloss',
         note: 'Historisches Wasserschloss mit großer Parkanlage und Museum für moderne Kunst – ideal für einen entspannten Ausflug.',
         image: 'https://cdn.pixabay.com/photo/2016/03/28/18/59/castle-1286650_960_720.jpg',
-        destination: 'Schloss Moyland'
+        destination: 'Schloss Moyland',
+        coords: [51.7349, 6.2872]
       },
       {
         name: 'Eisenbahnmuseum Bochum',
@@ -2273,59 +2285,54 @@
         type: 'Museum',
         note: 'Das größte private Eisenbahnmuseum Deutschlands mit historischen Lokomotiven, Waggons und spannender Technikgeschichte – ein tolles Ausflugsziel für Familien.',
         image: 'https://www.bochum-tourismus.de/media/_processed_/9/c/csm_Dahlhausen_Eisenbahnmuseum_Lok_eb8bda4e8b.jpg',
-        destination: 'Eisenbahnmuseum Bochum'
+        destination: 'Eisenbahnmuseum Bochum',
+        coords: [51.4484, 7.1316]
       },
-      
-{
-  name: 'Westfalenpark & Florianturm',
-  city: 'Dortmund',
-  type: 'Park',
-  note: 'Große Parkanlage mit viel Platz zum Entspannen und Entdecken – inklusive Aussichtsturm mit Blick über das Ruhrgebiet.',
-  image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Westfalenpark_Dortmund%2C_Teich_am_Eingang.jpg/1280px-Westfalenpark_Dortmund%2C_Teich_am_Eingang.jpg',
-  destination: 'Westfalenpark Dortmund'
-},
-   
-{
-  name: 'Phoenix-See',
-  city: 'Dortmund',
-  type: 'See',
-  note: 'Moderner See mit Promenade, Cafés und entspanter Atmosphäre – ideal für Spaziergänge und Sonnenuntergänge.',
-  image: 'https://www.phoenix-see.de/wp-content/uploads/2014/10/phoenixsee-hero.jpg',
-  destination: 'Phoenix See Dortmund'
-},
-      
-{
-  name: 'Henrichshütte Hattingen',
-  city: 'Hattingen',
-  type: 'Kultur',
-  note: 'Ehemaliges Hüttenwerk mit Hochöfen – Industriekultur zum Erkunden und Staunen.',
-  image: 'https://www.hattingen-tourismus.de/wp-content/uploads/2023/07/Hochofen-beleuchtet-mit-Schienenbus-2048x1365.jpg',
-  destination: 'Henrichshütte Hattingen'
-},
-    
-{
-  name: 'Kemnader See',
-  city: 'Bochum',
-  type: 'See',
-  note: 'Großer See mit viel Platz zum Spazieren, Radfahren und Entspannen am Wasser.',
-  image: 'https://www.ruhrverband.de/fileadmin/_processed_/1/f/csm_Kemnader_See_c4182fa8ef.jpg',
-  destination: 'Kemnader See Bochum'
-},
-   
-{
-  name: 'Kernie’s Familienpark',
-  city: 'Kalkar',
-  type: 'Freizeitpark',
-  note: 'Familienfreundlicher Freizeitpark im Wunderland Kalkar mit vielen Attraktionen und All-inclusive-Angebot (Pommes, Eis und Getränke).',
-  image: 'https://www.niederrhein.de/images/Unternehmen/Freizeitanbieter/WunderlandKalkar/familienpark/gallery/_MG_1249.jpg',
-  destination: 'Wunderland Kalkar Kernie’s Familienpark'
-}
-  
-  
-
-
-  
-
+      {
+        name: 'Westfalenpark & Florianturm',
+        city: 'Dortmund',
+        type: 'Park',
+        note: 'Große Parkanlage mit viel Platz zum Entspannen und Entdecken – inklusive Aussichtsturm mit Blick über das Ruhrgebiet.',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Westfalenpark_Dortmund%2C_Teich_am_Eingang.jpg/1280px-Westfalenpark_Dortmund%2C_Teich_am_Eingang.jpg',
+        destination: 'Westfalenpark Dortmund',
+        coords: [51.4955, 7.4787]
+      },
+      {
+        name: 'Phoenix-See',
+        city: 'Dortmund',
+        type: 'See',
+        note: 'Moderner See mit Promenade, Cafés und entspanter Atmosphäre – ideal für Spaziergänge und Sonnenuntergänge.',
+        image: 'https://www.phoenix-see.de/wp-content/uploads/2014/10/phoenixsee-hero.jpg',
+        destination: 'Phoenix See Dortmund',
+        coords: [51.4946, 7.5086]
+      },
+      {
+        name: 'Henrichshütte Hattingen',
+        city: 'Hattingen',
+        type: 'Kultur',
+        note: 'Ehemaliges Hüttenwerk mit Hochöfen – Industriekultur zum Erkunden und Staunen.',
+        image: 'https://www.hattingen-tourismus.de/wp-content/uploads/2023/07/Hochofen-beleuchtet-mit-Schienenbus-2048x1365.jpg',
+        destination: 'Henrichshütte Hattingen',
+        coords: [51.4012, 7.1843]
+      },
+      {
+        name: 'Kemnader See',
+        city: 'Bochum',
+        type: 'See',
+        note: 'Großer See mit viel Platz zum Spazieren, Radfahren und Entspannen am Wasser.',
+        image: 'https://www.ruhrverband.de/fileadmin/_processed_/1/f/csm_Kemnader_See_c4182fa8ef.jpg',
+        destination: 'Kemnader See Bochum',
+        coords: [51.4188, 7.2607]
+      },
+      {
+        name: 'Kernie’s Familienpark',
+        city: 'Kalkar',
+        type: 'Freizeitpark',
+        note: 'Familienfreundlicher Freizeitpark im Wunderland Kalkar mit vielen Attraktionen und All-inclusive-Angebot (Pommes, Eis und Getränke).',
+        image: 'https://www.niederrhein.de/images/Unternehmen/Freizeitanbieter/WunderlandKalkar/familienpark/gallery/_MG_1249.jpg',
+        destination: 'Wunderland Kalkar Kernie’s Familienpark',
+        coords: [51.7578, 6.3244]
+      }
     ];
 
     const accommodationGallery = [
@@ -2460,6 +2467,40 @@
 
     function directionsUrl(destination) {
       return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(accommodationAddress)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+    }
+
+    function getDistanceKm(fromCoords, toCoords) {
+      if (
+        !Array.isArray(fromCoords) ||
+        !Array.isArray(toCoords) ||
+        fromCoords.length !== 2 ||
+        toCoords.length !== 2
+      ) {
+        return null;
+      }
+
+      const toRad = value => (value * Math.PI) / 180;
+
+      const lat1 = fromCoords[0];
+      const lon1 = fromCoords[1];
+      const lat2 = toCoords[0];
+      const lon2 = toCoords[1];
+
+      const earthRadiusKm = 6371;
+
+      const dLat = toRad(lat2 - lat1);
+      const dLon = toRad(lon2 - lon1);
+
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) *
+          Math.cos(toRad(lat2)) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+      return (earthRadiusKm * c).toFixed(1);
     }
 
     function updateCountdown() {
@@ -2662,6 +2703,10 @@
 
       if (item.city) metaItems.push(item.city);
       if (item.type) metaItems.push(item.type);
+
+      const distance = getDistanceKm(accommodationCoords, item.coords);
+      if (distance) metaItems.push(`${distance} km von der Unterkunft`);
+
       if (Array.isArray(item.meta)) metaItems.push(...item.meta);
 
       lightboxMeta.innerHTML = metaItems
@@ -2753,41 +2798,46 @@
         ? places
         : places.filter(place => place.type === activeFilter);
 
-      placesGrid.innerHTML = visiblePlaces.map((place, index) => `
-        <article class="card place-card" data-reveal>
-          <button
-            class="place-trigger"
-            type="button"
-            data-place-index="${index}"
-            aria-label="${place.name} groß anzeigen">
-            <div class="place-media">
-              <img src="${place.image}" alt="${place.name}" loading="lazy" decoding="async">
-            </div>
+      placesGrid.innerHTML = visiblePlaces.map((place, index) => {
+        const distance = getDistanceKm(accommodationCoords, place.coords);
 
-            <div class="place-content">
-              <div class="place-top">
-                <h3>${place.name}</h3>
-                <p>${place.note}</p>
+        return `
+          <article class="card place-card" data-reveal>
+            <button
+              class="place-trigger"
+              type="button"
+              data-place-index="${index}"
+              aria-label="${place.name} groß anzeigen">
+              <div class="place-media">
+                <img src="${place.image}" alt="${place.name}" loading="lazy" decoding="async">
               </div>
 
-              <div class="place-tags">
-                <span class="tag">${place.city}</span>
-                <span class="tag">${place.type}</span>
-              </div>
-            </div>
-          </button>
+              <div class="place-content">
+                <div class="place-top">
+                  <h3>${place.name}</h3>
+                  <p>${place.note}</p>
+                </div>
 
-          <div class="place-actions">
-            <a
-              class="btn btn-secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="${directionsUrl(place.destination)}">
-              Navigation öffnen
-            </a>
-          </div>
-        </article>
-      `).join('');
+                <div class="place-tags">
+                  <span class="tag">${place.city}</span>
+                  <span class="tag">${place.type}</span>
+                  ${distance ? `<span class="tag">${distance} km entfernt</span>` : ''}
+                </div>
+              </div>
+            </button>
+
+            <div class="place-actions">
+              <a
+                class="btn btn-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="${directionsUrl(place.destination)}">
+                Navigation öffnen
+              </a>
+            </div>
+          </article>
+        `;
+      }).join('');
 
       placesGrid.querySelectorAll('.place-trigger').forEach((trigger, index) => {
         trigger.addEventListener('click', () => {
@@ -2981,4 +3031,3 @@
   </script>
 </body>
 </html>
-``
