@@ -874,13 +874,69 @@
       margin-bottom: 18px;
     }
 
+    /* ===== Premium Filter UX ===== */
+    .filter-scroll-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 999px;
+    }
+
+    .filter-scroll-shell::before,
+    .filter-scroll-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      z-index: 3;
+      width: 42px;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.22s ease;
+    }
+
+    .filter-scroll-shell::before {
+      left: 0;
+      background: linear-gradient(
+        to right,
+        rgba(13, 17, 23, 0.98),
+        rgba(13, 17, 23, 0)
+      );
+    }
+
+    .filter-scroll-shell::after {
+      right: 0;
+      background: linear-gradient(
+        to left,
+        rgba(13, 17, 23, 0.98),
+        rgba(13, 17, 23, 0)
+      );
+    }
+
+    .filter-scroll-shell.is-overflowing:not(.is-at-start)::before {
+      opacity: 1;
+    }
+
+    .filter-scroll-shell.is-overflowing:not(.is-at-end)::after {
+      opacity: 1;
+    }
+
     .filter-row {
       display: flex;
       gap: 10px;
       overflow-x: auto;
-      padding-bottom: 4px;
+      overflow-y: hidden;
+      padding: 4px 2px 8px;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-x;
+    }
+
+    .filter-row.dragging {
+      cursor: grabbing;
+      scroll-behavior: auto;
     }
 
     .filter-row::-webkit-scrollbar {
@@ -898,6 +954,7 @@
       cursor: pointer;
       transition: 0.22s ease;
       font-weight: 700;
+      white-space: nowrap;
     }
 
     .filter-chip.is-active,
@@ -908,6 +965,20 @@
       border-color: rgba(216,179,138,0.28);
       outline: none;
     }
+
+    .filter-scroll-shell.is-hinting::after {
+      opacity: 1;
+      animation: filterFadePulse 1.4s ease 1;
+    }
+
+    @keyframes filterFadePulse {
+      0%   { opacity: 0; transform: translateX(0); }
+      25%  { opacity: 1; transform: translateX(0); }
+      50%  { opacity: 1; transform: translateX(-3px); }
+      75%  { opacity: 1; transform: translateX(0); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    /* ===== Ende Premium Filter UX ===== */
 
     .places-grid {
       display: grid;
@@ -1539,17 +1610,25 @@
         opacity: 1;
         transform: none;
       }
+
+      .filter-row {
+        scroll-behavior: auto;
+      }
+
+      .filter-scroll-shell.is-hinting::after {
+        animation: none;
+      }
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  #mainZum Inhalt springen</a>
   <div class="progress-bar" aria-hidden="true"></div>
 
   <div class="page-shell">
     <header class="header">
       <div class="container header-inner">
-        <a class="brand" href="#top" aria-label="Zurück zum Seitenanfang">
+        #top
           <div class="brand-badge" aria-hidden="true">FT</div>
           <div class="brand-text">
             <div class="brand-title">Familientreffen 2027</div>
@@ -1558,10 +1637,10 @@
         </a>
 
         <nav class="nav-inline" aria-label="Hauptnavigation">
-          <a class="nav-link" href="#countdown" data-nav-link="countdown">Countdown</a>
-          <a class="nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick</a>
-          <a class="nav-link" href="#orte" data-nav-link="orte">Orte</a>
-          <a class="nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft</a>
+          #countdownCountdown</a>
+          #ueberblickÜberblick</a>
+          #orteOrte</a>
+          #unterkunftUnterkunft</a>
         </nav>
 
         <button
@@ -1593,10 +1672,10 @@
       </div>
 
       <nav class="mobile-nav-links" aria-label="Mobile Navigation">
-        <a class="mobile-nav-link" href="#countdown" data-nav-link="countdown">Countdown <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#orte" data-nav-link="orte">Orte <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft <span aria-hidden="true">→</span></a>
+        #countdownCountdown <span aria-hidden="true">→</span></a>
+        #ueberblickÜberblick <span aria-hidden="true">→</span></a>
+        #orteOrte <span aria-hidden="true">→</span></a>
+        #unterkunftUnterkunft <span aria-hidden="true">→</span></a>
       </nav>
 
       <div class="mobile-nav-note">
@@ -1624,8 +1703,8 @@
               </p>
 
               <div class="hero-actions">
-                <a class="btn btn-primary" href="#orte">Orte entdecken</a>
-                <a class="btn btn-secondary" href="#unterkunft">Zur Unterkunft</a>
+                #orteOrte entdecken</a>
+                #unterkunftZur Unterkunft</a>
               </div>
             </div>
 
@@ -1661,7 +1740,7 @@
           </div>
         </div>
 
-        <a class="scroll-cue" href="#countdown" aria-label="Zum Countdown springen">↓</a>
+        #countdown↓</a>
       </section>
 
       <section class="section" id="countdown">
@@ -1753,7 +1832,9 @@
           </div>
 
           <div class="places-toolbar" data-reveal>
-            <div class="filter-row" id="filterRow" aria-label="Orte filtern"></div>
+            <div class="filter-scroll-shell is-at-start is-at-end" id="filterShell">
+              <div class="filter-row" id="filterRow" aria-label="Orte filtern"></div>
+            </div>
           </div>
 
           <div class="places-grid" id="placesGrid" aria-live="polite"></div>
@@ -1881,7 +1962,7 @@
 
       <div class="lightbox-grid">
         <div class="lightbox-image-wrap">
-          <img class="lightbox-image" id="lightboxImage" src="" alt="">
+          
         </div>
 
         <div class="lightbox-body">
@@ -1890,12 +1971,7 @@
           <p class="lightbox-text" id="lightboxText"></p>
 
           <div class="lightbox-actions">
-            <a
-              class="btn btn-secondary is-hidden"
-              id="lightboxDirections"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="#">
+            #
               Navigation öffnen
             </a>
           </div>
@@ -2067,6 +2143,7 @@
     const root = document.documentElement;
 
     const filterRow = document.getElementById('filterRow');
+    const filterShell = document.getElementById('filterShell');
     const placesGrid = document.getElementById('placesGrid');
 
     const navToggle = document.getElementById('navToggle');
@@ -2107,6 +2184,13 @@
     let currentLightboxIndex = -1;
     let activeAccommodationIndex = 0;
 
+    /* ===== Filter UX State ===== */
+    let filterHintPlayed = false;
+    let isFilterDragging = false;
+    let filterDragStartX = 0;
+    let filterScrollStart = 0;
+    /* ===== Ende Filter UX State ===== */
+
     const scrollLocks = new Set();
 
     function setScrollLock(source, isLocked) {
@@ -2120,7 +2204,7 @@
 
     function getFocusableElements(container) {
       return [...container.querySelectorAll(
-        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), not([tabindex="-1"])'
       )].filter(el => {
         return !el.hasAttribute('hidden') &&
                el.getAttribute('aria-hidden') !== 'true' &&
@@ -2196,7 +2280,95 @@
           }
         });
       });
+
+      requestAnimationFrame(updateFilterOverflowState);
     }
+
+    /* ===== Premium Filter UX ===== */
+    function updateFilterOverflowState() {
+      if (!filterRow || !filterShell) return;
+
+      const maxScroll = Math.max(filterRow.scrollWidth - filterRow.clientWidth, 0);
+      const currentScroll = Math.round(filterRow.scrollLeft);
+
+      const isOverflowing = maxScroll > 8;
+      const isAtStart = currentScroll <= 2;
+      const isAtEnd = currentScroll >= maxScroll - 2;
+
+      filterShell.classList.toggle('is-overflowing', isOverflowing);
+      filterShell.classList.toggle('is-at-start', isAtStart);
+      filterShell.classList.toggle('is-at-end', isAtEnd);
+    }
+
+    function playFilterHintIfNeeded() {
+      if (filterHintPlayed) return;
+      if (!filterRow || !filterShell) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const maxScroll = filterRow.scrollWidth - filterRow.clientWidth;
+      if (maxScroll <= 8) return;
+
+      filterHintPlayed = true;
+      filterShell.classList.add('is-hinting');
+
+      setTimeout(() => {
+        filterRow.scrollBy({ left: 56, behavior: 'smooth' });
+
+        setTimeout(() => {
+          filterRow.scrollBy({ left: -56, behavior: 'smooth' });
+          setTimeout(() => {
+            filterShell.classList.remove('is-hinting');
+          }, 700);
+        }, 650);
+      }, 850);
+    }
+
+    function initFilterDragScroll() {
+      if (!filterRow) return;
+
+      filterRow.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'touch') return;
+        if (event.target.closest('.filter-chip')) return;
+
+        isFilterDragging = true;
+        filterRow.classList.add('dragging');
+        filterDragStartX = event.clientX;
+        filterScrollStart = filterRow.scrollLeft;
+
+        try {
+          filterRow.setPointerCapture(event.pointerId);
+        } catch (e) {
+          /* no-op */
+        }
+      });
+
+      filterRow.addEventListener('pointermove', (event) => {
+        if (!isFilterDragging) return;
+
+        const delta = event.clientX - filterDragStartX;
+        filterRow.scrollLeft = filterScrollStart - delta;
+        updateFilterOverflowState();
+      });
+
+      function stopFilterDragging() {
+        if (!isFilterDragging) return;
+        isFilterDragging = false;
+        filterRow.classList.remove('dragging');
+      }
+
+      filterRow.addEventListener('pointerup', stopFilterDragging);
+      filterRow.addEventListener('pointercancel', stopFilterDragging);
+      filterRow.addEventListener('pointerleave', stopFilterDragging);
+
+      filterRow.addEventListener('scroll', updateFilterOverflowState, { passive: true });
+      window.addEventListener('resize', updateFilterOverflowState);
+    }
+
+    function initFilterUX() {
+      updateFilterOverflowState();
+      playFilterHintIfNeeded();
+    }
+    /* ===== Ende Premium Filter UX ===== */
 
     const revealObserver = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       ? null
@@ -2591,6 +2763,9 @@
     setActiveAccommodation(0);
     revealElements();
     requestScrollTick();
+
+    initFilterDragScroll();
+    initFilterUX();
 
     if (document.readyState === 'complete') {
       hydrateHeroSlides();
