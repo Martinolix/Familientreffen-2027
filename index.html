@@ -1064,6 +1064,7 @@
     .gallery-wrap {
       display: grid;
       gap: 18px;
+      margin-bottom: 32px;
     }
 
     .gallery-thumbs {
@@ -1120,6 +1121,57 @@
       font-weight: 700;
       text-align: left;
       backdrop-filter: blur(8px);
+    }
+
+    .accommodation-summary {
+      margin-top: 0;
+      margin-bottom: 18px;
+      border-radius: var(--radius-xl);
+      padding: 22px;
+    }
+
+    .accommodation-summary-head {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .accommodation-summary-head h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.2;
+    }
+
+    .accommodation-summary-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .accommodation-points {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .accommodation-point {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .accommodation-point-title {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .accommodation-point-text {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
     }
 
     .address-card {
@@ -1449,6 +1501,10 @@
         grid-template-columns: repeat(4, 1fr);
       }
 
+      .accommodation-points {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .address-wrap {
         grid-template-columns: 1fr auto;
         align-items: end;
@@ -1765,36 +1821,43 @@
             </div>
           </div>
 
-          <div class="card-grid info-grid">
-            <article class="card" data-reveal>
-              <div class="card-body">
-                <h3>Atmosphäre</h3>
-                <p>
-                  Ein ruhiger Ort mit viel Charme und Geschichte – ideal, um gemeinsam anzukommen,
-                  durchzuatmen und das Wochenende entspannt zu genießen.
-                </p>
-              </div>
-            </article>
+          <div class="accommodation-summary surface-strong" data-reveal>
+            <div class="accommodation-summary-head">
+              <h3>Das Alte Pastorat auf einen Blick</h3>
+              <p>
+                Ein Ort mit ruhiger Atmosphäre, viel Platz und genau der richtigen Mischung aus Rückzug und gemeinsamer Zeit.
+              </p>
+            </div>
 
-            <article class="card" data-reveal>
-              <div class="card-body">
-                <h3>Platz für alle</h3>
-                <p>
-                  Genug Raum zum Zusammensitzen, für Gespräche, Spiele oder einfach Zeit miteinander –
-                  drinnen wie draußen.
+            <div class="accommodation-points">
+              <div class="accommodation-point">
+                <span class="accommodation-point-title">Ruhige Atmosphäre</span>
+                <p class="accommodation-point-text">
+                  Ideal zum Ankommen, Durchatmen und für ein entspanntes gemeinsames Wochenende.
                 </p>
               </div>
-            </article>
 
-            <article class="card" data-reveal>
-              <div class="card-body">
-                <h3>Außenbereich</h3>
-                <p>
-                  Garten und Umgebung bieten die Möglichkeit für ruhige Momente,
-                  gemeinsames Essen oder einfach ein bisschen frische Luft zwischendurch.
+              <div class="accommodation-point">
+                <span class="accommodation-point-title">Gemeinschaft im Mittelpunkt</span>
+                <p class="accommodation-point-text">
+                  Aufenthaltsbereiche und gemeinsame Räume bieten Platz für Gespräche, Essen und schöne Abende zusammen.
                 </p>
               </div>
-            </article>
+
+              <div class="accommodation-point">
+                <span class="accommodation-point-title">Außenbereich &amp; Garten</span>
+                <p class="accommodation-point-text">
+                  Draußen ist Raum für frische Luft, ruhige Momente und entspanntes Zusammensitzen.
+                </p>
+              </div>
+
+              <div class="accommodation-point">
+                <span class="accommodation-point-title">Mehrere Schlafmöglichkeiten</span>
+                <p class="accommodation-point-text">
+                  Rückzugsorte und Zimmer sorgen dafür, dass Gemeinschaft und Erholung gut zusammenpassen.
+                </p>
+              </div>
+            </div>
           </div>
 
           <div class="address-card surface-strong" data-reveal>
