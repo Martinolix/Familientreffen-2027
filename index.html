@@ -35,8 +35,6 @@
       --accent-3: #7d8b98;
       --accent-dark: #160e0a;
 
-      --success: #bdd5b0;
-
       --shadow-xl: 0 28px 80px rgba(0, 0, 0, 0.42);
       --shadow-lg: 0 18px 45px rgba(0, 0, 0, 0.32);
       --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.22);
@@ -60,7 +58,8 @@
       --space-9: 72px;
 
       --safe-bottom: env(safe-area-inset-bottom, 0px);
-      --header-offset: 92px;
+      --header-offset: 96px;
+      --progress: 0%;
     }
 
     * {
@@ -170,14 +169,52 @@
       background: rgba(125, 139, 152, 0.12);
     }
 
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 150;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .progress-bar::after {
+      content: "";
+      display: block;
+      width: var(--progress);
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(216, 179, 138, 0.4);
+      transition: width 0.08s linear;
+    }
+
     .container {
       width: min(100% - 32px, var(--container));
       margin-inline: auto;
     }
 
     .section {
+      position: relative;
       padding: var(--space-8) 0;
       scroll-margin-top: var(--header-offset);
+    }
+
+    .section::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: min(88%, 1020px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      pointer-events: none;
+    }
+
+    .section:last-of-type::after {
+      display: none;
     }
 
     .hero,
@@ -204,7 +241,7 @@
       top: 0;
       z-index: 100;
       padding-top: max(12px, env(safe-area-inset-top, 0px));
-      background: linear-gradient(180deg, rgba(9,11,15,0.92), rgba(9,11,15,0.72));
+      background: linear-gradient(180deg, rgba(9,11,15,0.92), rgba(9,11,15,0.74));
       backdrop-filter: blur(18px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
@@ -284,6 +321,13 @@
       outline: none;
     }
 
+    .nav-link.is-active {
+      color: var(--text);
+      background: linear-gradient(145deg, rgba(181,83,47,0.18), rgba(216,179,138,0.10));
+      border-color: rgba(216,179,138,0.28);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
     /* Mobile Navigation */
     .nav-toggle {
       appearance: none;
@@ -344,7 +388,7 @@
       position: fixed;
       inset: 0;
       z-index: 120;
-      background: rgba(4, 7, 11, 0.7);
+      background: rgba(4, 7, 11, 0.72);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       opacity: 0;
@@ -439,6 +483,11 @@
       background: rgba(255,255,255,0.12);
       border-color: rgba(255,255,255,0.16);
       outline: none;
+    }
+
+    .mobile-nav-link.is-active {
+      background: linear-gradient(145deg, rgba(181,83,47,0.20), rgba(216,179,138,0.10));
+      border-color: rgba(216,179,138,0.28);
     }
 
     .mobile-nav-note {
@@ -726,6 +775,18 @@
       padding: 22px;
       content-visibility: auto;
       contain-intrinsic-size: 450px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-wrap::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -120px -20%;
+      height: 160px;
+      background: radial-gradient(circle, rgba(181,83,47,0.10), transparent 70%);
+      pointer-events: none;
+      filter: blur(32px);
     }
 
     .countdown-grid {
@@ -941,36 +1002,142 @@
       pointer-events: auto;
     }
 
-    .accommodation-gallery {
+    .gallery-wrap {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-bottom: 18px;
+      gap: 18px;
     }
 
-    .accommodation-image {
+    .gallery-hero {
       position: relative;
       overflow: hidden;
-      border-radius: 22px;
+      border-radius: 24px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow-md);
-      aspect-ratio: 4 / 3;
-      content-visibility: auto;
-      contain-intrinsic-size: 340px;
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 16 / 9;
     }
 
-    .accommodation-image img {
+    .gallery-hero img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: saturate(0.95) contrast(1.02);
-      transition: transform 0.4s ease, filter 0.4s ease;
+      transition: transform 0.45s ease, filter 0.45s ease;
+      filter: saturate(0.96) contrast(1.02);
     }
 
-    .accommodation-image:hover img {
-      transform: scale(1.04);
+    .gallery-hero:hover img {
+      transform: scale(1.03);
       filter: brightness(1.03);
+    }
+
+    .gallery-hero-button {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .gallery-hero-button:focus-visible {
+      outline: 2px solid rgba(216,179,138,0.9);
+      outline-offset: -2px;
+    }
+
+    .gallery-hero-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: end;
+      justify-content: space-between;
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(10,12,16,0.24), rgba(10,12,16,0.72));
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .gallery-hero-copy {
+      max-width: 56ch;
+    }
+
+    .gallery-hero-title {
+      margin: 0;
+      font-size: 1.06rem;
+      font-weight: 800;
+    }
+
+    .gallery-hero-text {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.94rem;
+    }
+
+    .gallery-thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .thumb-button {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      border-radius: 18px;
+      overflow: hidden;
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      aspect-ratio: 4 / 3;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      box-shadow: var(--shadow-md);
+    }
+
+    .thumb-button:hover,
+    .thumb-button:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(216,179,138,0.28);
+      outline: none;
+    }
+
+    .thumb-button.is-active {
+      border-color: rgba(216,179,138,0.36);
+      box-shadow: 0 0 0 1px rgba(216,179,138,0.18), var(--shadow-md);
+    }
+
+    .thumb-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.96) contrast(1.02);
+      transition: transform 0.35s ease;
+    }
+
+    .thumb-button:hover img,
+    .thumb-button:focus-visible img {
+      transform: scale(1.04);
+    }
+
+    .thumb-label {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(8,10,14,0.66);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: left;
+      backdrop-filter: blur(8px);
     }
 
     .address-card {
@@ -1018,8 +1185,11 @@
       transform: translateY(0);
     }
 
-    /* Lightbox */
+    .is-hidden {
+      display: none !important;
+    }
 
+    /* Shared Lightbox */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -1120,13 +1290,8 @@
       pointer-events: none;
     }
 
-    .lightbox-prev {
-      left: 14px;
-    }
-
-    .lightbox-next {
-      right: 14px;
-    }
+    .lightbox-prev { left: 14px; }
+    .lightbox-next { right: 14px; }
 
     .lightbox-grid {
       display: grid;
@@ -1182,13 +1347,43 @@
       width: 100%;
     }
 
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: calc(18px + var(--safe-bottom));
+      z-index: 140;
+      width: 54px;
+      height: 54px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(10,12,16,0.78);
+      backdrop-filter: blur(12px);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease, background 0.22s ease;
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover,
+    .back-to-top:focus-visible {
+      background: rgba(255,255,255,0.12);
+      outline: none;
+    }
+
     @media (min-width: 620px) {
       .countdown-grid {
         grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-
-      .accommodation-gallery {
-        grid-template-columns: repeat(2, 1fr);
       }
 
       .info-grid,
@@ -1204,18 +1399,17 @@
         font-size: 1.2rem;
       }
 
-      .lightbox-prev {
-        left: 10px;
-      }
+      .lightbox-prev { left: 10px; }
+      .lightbox-next { right: 10px; }
 
-      .lightbox-next {
-        right: 10px;
+      .gallery-thumbs {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (min-width: 860px) {
       :root {
-        --header-offset: 104px;
+        --header-offset: 106px;
       }
 
       .container {
@@ -1269,9 +1463,8 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
-      .accommodation-gallery {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
+      .gallery-thumbs {
+        grid-template-columns: repeat(6, 1fr);
       }
 
       .address-wrap {
@@ -1323,6 +1516,11 @@
       .lightbox-actions .btn {
         width: auto;
       }
+
+      .back-to-top {
+        right: 24px;
+        bottom: calc(24px + var(--safe-bottom));
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1346,6 +1544,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <div class="progress-bar" aria-hidden="true"></div>
 
   <div class="page-shell">
     <header class="header">
@@ -1359,10 +1558,10 @@
         </a>
 
         <nav class="nav-inline" aria-label="Hauptnavigation">
-          <a class="nav-link" href="#countdown">Countdown</a>
-          <a class="nav-link" href="#ueberblick">Überblick</a>
-          <a class="nav-link" href="#orte">Orte</a>
-          <a class="nav-link" href="#unterkunft">Unterkunft</a>
+          <a class="nav-link" href="#countdown" data-nav-link="countdown">Countdown</a>
+          <a class="nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick</a>
+          <a class="nav-link" href="#orte" data-nav-link="orte">Orte</a>
+          <a class="nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft</a>
         </nav>
 
         <button
@@ -1394,10 +1593,10 @@
       </div>
 
       <nav class="mobile-nav-links" aria-label="Mobile Navigation">
-        <a class="mobile-nav-link" href="#countdown">Countdown <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#ueberblick">Überblick <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#orte">Orte <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#unterkunft">Unterkunft <span aria-hidden="true">→</span></a>
+        <a class="mobile-nav-link" href="#countdown" data-nav-link="countdown">Countdown <span aria-hidden="true">→</span></a>
+        <a class="mobile-nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick <span aria-hidden="true">→</span></a>
+        <a class="mobile-nav-link" href="#orte" data-nav-link="orte">Orte <span aria-hidden="true">→</span></a>
+        <a class="mobile-nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft <span aria-hidden="true">→</span></a>
       </nav>
 
       <div class="mobile-nav-note">
@@ -1572,48 +1771,32 @@
             </p>
           </div>
 
-          <div class="accommodation-gallery" data-reveal>
-            <div class="accommodation-image">
-              <img
-                src="https://imgservice.rentbyowner.com/680x408/das-alte-pastorat-de-kevelaer-bc-5415524-0.jpg"
-                alt="Außenansicht des Alten Pastorats"
-                loading="lazy"
-                decoding="async">
+          <div class="gallery-wrap" data-reveal>
+            <div class="gallery-hero">
+              <button
+                class="gallery-hero-button"
+                type="button"
+                id="galleryHeroButton"
+                aria-label="Unterkunftsbild groß anzeigen">
+                <img
+                  id="galleryHeroImage"
+                  src="https://imgservice.rentbyowner.com/680x408/das-alte-pastorat-de-kevelaer-bc-5415524-0.jpg"
+                  alt="Außenansicht des Alten Pastorats"
+                  decoding="async">
+                <div class="gallery-hero-caption">
+                  <div class="gallery-hero-copy">
+                    <h3 class="gallery-hero-title" id="galleryHeroTitle">Außenansicht</h3>
+                    <p class="gallery-hero-text" id="galleryHeroText">
+                      Ein erster Blick auf das Alte Pastorat – unser gemeinsamer Mittelpunkt für das Wochenende.
+                    </p>
+                  </div>
+                  <span class="tag">Galerie öffnen</span>
+                </div>
+              </button>
             </div>
-            <div class="accommodation-image">
-              <img
-                src="https://2.brf.be/wp-content/uploads/sites/3/2023/03/das-alte-pastorat-mit-garten-1200x800.jpg"
-                alt="Das Alte Pastorat mit Garten"
-                loading="lazy"
-                decoding="async">
-            </div>
-            <div class="accommodation-image">
-              <img
-                src="https://www.gruppenunterkuenfte.de/img-webp/n513x342/Altes-Pastorat-Rouenhof-__t13397i.webp"
-                alt="Ess- und Aufenthaltsbereich im Alten Pastorat"
-                loading="lazy"
-                decoding="async">
-            </div>
-            <div class="accommodation-image">
-              <img
-                src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/635497043.jpg?k=33ed8dfbac42aefe9243240f679d1201a4e209b3444c6a973aabd5f3ad997f67&o="
-                alt="Schlafzimmer im Alten Pastorat"
-                loading="lazy"
-                decoding="async">
-            </div>
-            <div class="accommodation-image">
-              <img
-                src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/635497796.jpg?k=61821f464b65561c9bc4ca2b99ef5497fbf3f97bc1328eed638a10b9fd599567&o=&hp=1"
-                alt="Weiteres Schlafzimmer im Alten Pastorat"
-                loading="lazy"
-                decoding="async">
-            </div>
-            <div class="accommodation-image">
-              <img
-                src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/631174141.jpg?k=6004847d1b44163f6e158441c2462479a452784b267098121f4509fd7e3a2282&o=&hp=1"
-                alt="Innenraum der Unterkunft"
-                loading="lazy"
-                decoding="async">
+
+            <div class="gallery-thumbs" id="galleryThumbs" aria-label="Unterkunftsbilder Auswahl">
+              <!-- wird per JS befüllt -->
             </div>
           </div>
 
@@ -1683,8 +1866,8 @@
     </footer>
   </div>
 
-  <!-- Lightbox für Ausflugsorte -->
-  <div class="lightbox" id="placeLightbox" aria-hidden="true">
+  <!-- Gemeinsame Lightbox für Orte + Unterkunft -->
+  <div class="lightbox" id="sharedLightbox" aria-hidden="true">
     <div
       class="lightbox-dialog"
       id="lightboxDialog"
@@ -1693,8 +1876,8 @@
       aria-labelledby="lightboxTitle"
       aria-describedby="lightboxText">
       <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Schließen">✕</button>
-      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Vorheriger Ort">‹</button>
-      <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Nächster Ort">›</button>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Vorheriges Bild oder vorheriger Ort">‹</button>
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Nächstes Bild oder nächster Ort">›</button>
 
       <div class="lightbox-grid">
         <div class="lightbox-image-wrap">
@@ -1703,14 +1886,12 @@
 
         <div class="lightbox-body">
           <h3 class="lightbox-title" id="lightboxTitle"></h3>
-
           <div class="lightbox-meta" id="lightboxMeta"></div>
-
           <p class="lightbox-text" id="lightboxText"></p>
 
           <div class="lightbox-actions">
             <a
-              class="btn btn-secondary"
+              class="btn btn-secondary is-hidden"
               id="lightboxDirections"
               target="_blank"
               rel="noopener noreferrer"
@@ -1722,6 +1903,10 @@
       </div>
     </div>
   </div>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Zurück nach oben">
+    ↑
+  </button>
 
   <script>
     const accommodationAddress = 'Sonsbecker Straße 40, 47627 Kevelaer-Kervendonk';
@@ -1833,37 +2018,95 @@
       }
     ];
 
-    const body = document.body;
+    const accommodationGallery = [
+      {
+        title: 'Außenansicht',
+        description: 'Ein erster Blick auf das Alte Pastorat – unser gemeinsamer Mittelpunkt für das Wochenende.',
+        image: 'https://imgservice.rentbyowner.com/680x408/das-alte-pastorat-de-kevelaer-bc-5415524-0.jpg',
+        alt: 'Außenansicht des Alten Pastorats',
+        meta: ['Unterkunft', 'Außenbereich']
+      },
+      {
+        title: 'Gartenansicht',
+        description: 'Ruhige Atmosphäre mit viel Platz im Außenbereich.',
+        image: 'https://2.brf.be/wp-content/uploads/sites/3/2023/03/das-alte-pastorat-mit-garten-1200x800.jpg',
+        alt: 'Das Alte Pastorat mit Garten',
+        meta: ['Unterkunft', 'Garten']
+      },
+      {
+        title: 'Ess- und Aufenthaltsbereich',
+        description: 'Ein Ort zum Zusammensitzen, Essen und für gemeinsame Abende.',
+        image: 'https://www.gruppenunterkuenfte.de/img-webp/n513x342/Altes-Pastorat-Rouenhof-__t13397i.webp',
+        alt: 'Ess- und Aufenthaltsbereich im Alten Pastorat',
+        meta: ['Innenraum', 'Gemeinschaft']
+      },
+      {
+        title: 'Schlafzimmer',
+        description: 'Gemütliche Rückzugsorte für erholsame Nächte.',
+        image: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/635497043.jpg?k=33ed8dfbac42aefe9243240f679d1201a4e209b3444c6a973aabd5f3ad997f67&o=',
+        alt: 'Schlafzimmer im Alten Pastorat',
+        meta: ['Innenraum', 'Schlafzimmer']
+      },
+      {
+        title: 'Weiteres Schlafzimmer',
+        description: 'Weitere gemütliche Räume mit Platz für mehrere Gäste.',
+        image: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/635497796.jpg?k=61821f464b65561c9bc4ca2b99ef5497fbf3f97bc1328eed638a10b9fd599567&o=&hp=1',
+        alt: 'Weiteres Schlafzimmer im Alten Pastorat',
+        meta: ['Innenraum', 'Schlafzimmer']
+      },
+      {
+        title: 'Innenbereich',
+        description: 'Ein weiterer Eindruck vom historischen und wohnlichen Charakter des Hauses.',
+        image: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/631174141.jpg?k=6004847d1b44163f6e158441c2462479a452784b267098121f4509fd7e3a2282&o=&hp=1',
+        alt: 'Innenbereich im Alten Pastorat',
+        meta: ['Innenraum', 'Atmosphäre']
+      }
+    ];
 
-    const placesGrid = document.getElementById('placesGrid');
+    const body = document.body;
+    const root = document.documentElement;
+
     const filterRow = document.getElementById('filterRow');
+    const placesGrid = document.getElementById('placesGrid');
 
     const navToggle = document.getElementById('navToggle');
     const mobileNav = document.getElementById('mobileNav');
     const mobileNavOverlay = document.getElementById('mobileNavOverlay');
     const mobileNavClose = document.getElementById('mobileNavClose');
-    const mobileNavLinks = mobileNav.querySelectorAll('a');
+    const mobileNavLinks = mobileNav.querySelectorAll('a[data-nav-link]');
 
-    const lightbox = document.getElementById('placeLightbox');
+    const backToTop = document.getElementById('backToTop');
+
+    const galleryHeroButton = document.getElementById('galleryHeroButton');
+    const galleryHeroImage = document.getElementById('galleryHeroImage');
+    const galleryHeroTitle = document.getElementById('galleryHeroTitle');
+    const galleryHeroText = document.getElementById('galleryHeroText');
+    const galleryThumbs = document.getElementById('galleryThumbs');
+
+    const lightbox = document.getElementById('sharedLightbox');
     const lightboxDialog = document.getElementById('lightboxDialog');
     const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxTitle = document.getElementById('lightboxTitle');
     const lightboxMeta = document.getElementById('lightboxMeta');
     const lightboxText = document.getElementById('lightboxText');
     const lightboxDirections = document.getElementById('lightboxDirections');
-    const lightboxPrev = document.getElementById('lightboxPrev');
-    const lightboxNext = document.getElementById('lightboxNext');
+
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+    const sections = [...document.querySelectorAll('main section[id]')];
 
     let activeFilter = 'Alle';
-    let currentLightboxPlaces = [];
-    let currentLightboxIndex = -1;
-
-    let touchStartX = 0;
-    let touchStartY = 0;
-
     let lastFocusedElement = null;
     let lastFocusedMenuElement = null;
+    let scrollTicksRequested = false;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let currentLightboxItems = [];
+    let currentLightboxIndex = -1;
+    let activeAccommodationIndex = 0;
+
     const scrollLocks = new Set();
 
     function setScrollLock(source, isLocked) {
@@ -1877,8 +2120,12 @@
 
     function getFocusableElements(container) {
       return [...container.querySelectorAll(
-        'a[href], button:not([disabled]), textarea, input, select, summary, [tabindex]:not([tabindex="-1"])'
-      )].filter(el => !el.hasAttribute('hidden') && !el.getAttribute('aria-hidden'));
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )].filter(el => {
+        return !el.hasAttribute('hidden') &&
+               el.getAttribute('aria-hidden') !== 'true' &&
+               el.offsetParent !== null;
+      });
     }
 
     function trapFocus(container, event) {
@@ -1943,6 +2190,10 @@
           activeFilter = button.dataset.filter;
           renderFilters();
           renderPlaces();
+
+          if (window.innerWidth < 860) {
+            document.getElementById('orte').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         });
       });
     }
@@ -1978,49 +2229,64 @@
 
     function hydrateHeroSlides() {
       const deferredSlides = document.querySelectorAll('.hero-slide[data-bg]');
-      const loadSlide = (slide) => {
-        const bg = slide.dataset.bg;
-        if (!bg) return;
-        slide.style.backgroundImage = `url("${bg}")`;
-        slide.removeAttribute('data-bg');
-      };
 
       deferredSlides.forEach((slide, index) => {
+        const loadSlide = () => {
+          const bg = slide.dataset.bg;
+          if (!bg) return;
+          slide.style.backgroundImage = `url("${bg}")`;
+          slide.removeAttribute('data-bg');
+        };
+
         if ('requestIdleCallback' in window) {
-          requestIdleCallback(() => loadSlide(slide), { timeout: 1500 + index * 250 });
+          requestIdleCallback(loadSlide, { timeout: 1500 + index * 250 });
         } else {
-          setTimeout(() => loadSlide(slide), 300 + index * 200);
+          setTimeout(loadSlide, 300 + index * 200);
         }
       });
     }
 
     function updateLightboxNavButtons() {
       const isAtStart = currentLightboxIndex <= 0;
-      const isAtEnd = currentLightboxIndex >= currentLightboxPlaces.length - 1;
+      const isAtEnd = currentLightboxIndex >= currentLightboxItems.length - 1;
 
       lightboxPrev.classList.toggle('is-disabled', isAtStart);
       lightboxNext.classList.toggle('is-disabled', isAtEnd);
     }
 
-    function fillLightbox(place) {
-      lightboxImage.src = place.image;
-      lightboxImage.alt = place.name;
-      lightboxTitle.textContent = place.name;
-      lightboxText.textContent = place.note;
-      lightboxMeta.innerHTML = `
-        <span class="tag">${place.city}</span>
-        <span class="tag">${place.type}</span>
-      `;
-      lightboxDirections.href = directionsUrl(place.destination);
+    function fillLightbox(item) {
+      lightboxImage.src = item.image;
+      lightboxImage.alt = item.alt || item.name || item.title || '';
+      lightboxTitle.textContent = item.name || item.title || '';
+      lightboxText.textContent = item.note || item.description || '';
+
+      const metaItems = [];
+
+      if (item.city) metaItems.push(item.city);
+      if (item.type) metaItems.push(item.type);
+      if (Array.isArray(item.meta)) metaItems.push(...item.meta);
+
+      lightboxMeta.innerHTML = metaItems
+        .map(value => `<span class="tag">${value}</span>`)
+        .join('');
+
+      if (item.destination) {
+        lightboxDirections.href = directionsUrl(item.destination);
+        lightboxDirections.classList.remove('is-hidden');
+      } else {
+        lightboxDirections.href = '#';
+        lightboxDirections.classList.add('is-hidden');
+      }
     }
 
-    function openLightbox(place, visiblePlaces = places, index = 0) {
-      lastFocusedElement = document.activeElement;
+    function openLightbox(items, index = 0) {
+      if (!items.length) return;
 
-      currentLightboxPlaces = visiblePlaces;
+      lastFocusedElement = document.activeElement;
+      currentLightboxItems = items;
       currentLightboxIndex = index;
 
-      fillLightbox(place);
+      fillLightbox(currentLightboxItems[currentLightboxIndex]);
       updateLightboxNavButtons();
 
       lightbox.classList.add('is-open');
@@ -2030,14 +2296,12 @@
       lightboxClose.focus();
     }
 
-    function goToLightboxPlace(newIndex) {
-      if (!currentLightboxPlaces.length) return;
-      if (newIndex < 0 || newIndex >= currentLightboxPlaces.length) return;
+    function goToLightboxItem(newIndex) {
+      if (!currentLightboxItems.length) return;
+      if (newIndex < 0 || newIndex > currentLightboxItems.length - 1) return;
 
       currentLightboxIndex = newIndex;
-      const place = currentLightboxPlaces[currentLightboxIndex];
-
-      fillLightbox(place);
+      fillLightbox(currentLightboxItems[currentLightboxIndex]);
       updateLightboxNavButtons();
     }
 
@@ -2128,14 +2392,98 @@
       `).join('');
 
       placesGrid.querySelectorAll('.place-trigger').forEach((trigger, index) => {
-        const place = visiblePlaces[index];
-
         trigger.addEventListener('click', () => {
-          openLightbox(place, visiblePlaces, index);
+          openLightbox(visiblePlaces, index);
         });
       });
 
       revealElements();
+    }
+
+    function renderAccommodationThumbs() {
+      galleryThumbs.innerHTML = accommodationGallery.map((item, index) => `
+        <button
+          class="thumb-button ${index === activeAccommodationIndex ? 'is-active' : ''}"
+          type="button"
+          data-thumb-index="${index}"
+          aria-label="${item.title} auswählen">
+          <img src="${item.image}" alt="${item.alt}" loading="lazy" decoding="async">
+          <span class="thumb-label">${item.title}</span>
+        </button>
+      `).join('');
+
+      galleryThumbs.querySelectorAll('[data-thumb-index]').forEach(button => {
+        button.addEventListener('click', () => {
+          const newIndex = Number(button.dataset.thumbIndex);
+          setActiveAccommodation(newIndex);
+        });
+      });
+    }
+
+    function setActiveAccommodation(index) {
+      activeAccommodationIndex = index;
+      const item = accommodationGallery[activeAccommodationIndex];
+
+      galleryHeroImage.src = item.image;
+      galleryHeroImage.alt = item.alt;
+      galleryHeroTitle.textContent = item.title;
+      galleryHeroText.textContent = item.description;
+
+      galleryThumbs.querySelectorAll('[data-thumb-index]').forEach(button => {
+        const isActive = Number(button.dataset.thumbIndex) === activeAccommodationIndex;
+        button.classList.toggle('is-active', isActive);
+      });
+    }
+
+    function setActiveNav(currentId) {
+      navLinks.forEach(link => {
+        const isActive = link.dataset.navLink === currentId;
+        link.classList.toggle('is-active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    function getCurrentSectionId() {
+      const offset = (window.scrollY || window.pageYOffset) + 160;
+      let currentId = sections[0]?.id || 'countdown';
+
+      sections.forEach(section => {
+        if (offset >= section.offsetTop) {
+          currentId = section.id;
+        }
+      });
+
+      return currentId;
+    }
+
+    function updateProgress() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+
+      root.style.setProperty('--progress', `${progress}%`);
+    }
+
+    function updateBackToTop() {
+      const shouldShow = (window.scrollY || window.pageYOffset) > 540;
+      backToTop.classList.toggle('is-visible', shouldShow);
+    }
+
+    function onScrollTick() {
+      scrollTicksRequested = false;
+      setActiveNav(getCurrentSectionId());
+      updateProgress();
+      updateBackToTop();
+    }
+
+    function requestScrollTick() {
+      if (scrollTicksRequested) return;
+      scrollTicksRequested = true;
+      requestAnimationFrame(onScrollTick);
     }
 
     navToggle.addEventListener('click', () => {
@@ -2154,15 +2502,17 @@
       link.addEventListener('click', closeMobileNav);
     });
 
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    galleryHeroButton.addEventListener('click', () => {
+      openLightbox(accommodationGallery, activeAccommodationIndex);
+    });
+
     lightboxClose.addEventListener('click', closeLightbox);
-
-    lightboxPrev.addEventListener('click', () => {
-      goToLightboxPlace(currentLightboxIndex - 1);
-    });
-
-    lightboxNext.addEventListener('click', () => {
-      goToLightboxPlace(currentLightboxIndex + 1);
-    });
+    lightboxPrev.addEventListener('click', () => goToLightboxItem(currentLightboxIndex - 1));
+    lightboxNext.addEventListener('click', () => goToLightboxItem(currentLightboxIndex + 1));
 
     lightbox.addEventListener('click', (event) => {
       if (event.target === lightbox) {
@@ -2181,12 +2531,12 @@
         }
 
         if (event.key === 'ArrowLeft') {
-          goToLightboxPlace(currentLightboxIndex - 1);
+          goToLightboxItem(currentLightboxIndex - 1);
           return;
         }
 
         if (event.key === 'ArrowRight') {
-          goToLightboxPlace(currentLightboxIndex + 1);
+          goToLightboxItem(currentLightboxIndex + 1);
           return;
         }
 
@@ -2218,24 +2568,29 @@
       const touch = event.changedTouches[0];
       const deltaX = touch.clientX - touchStartX;
       const deltaY = touch.clientY - touchStartY;
-
       const horizontalSwipe = Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY);
 
       if (!horizontalSwipe) return;
 
       if (deltaX < 0) {
-        goToLightboxPlace(currentLightboxIndex + 1);
+        goToLightboxItem(currentLightboxIndex + 1);
       } else {
-        goToLightboxPlace(currentLightboxIndex - 1);
+        goToLightboxItem(currentLightboxIndex - 1);
       }
     }, { passive: true });
+
+    window.addEventListener('scroll', requestScrollTick, { passive: true });
+    window.addEventListener('resize', requestScrollTick);
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
     renderFilters();
     renderPlaces();
+    renderAccommodationThumbs();
+    setActiveAccommodation(0);
     revealElements();
+    requestScrollTick();
 
     if (document.readyState === 'complete') {
       hydrateHeroSlides();
