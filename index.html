@@ -1048,16 +1048,6 @@
       letter-spacing: 0.01em;
     }
 
-
-.tag-distance {
-  background: linear-gradient(145deg, var(--accent), var(--accent-2));
-  color: var(--accent-dark);
-  border: 1px solid rgba(216,179,138,0.4);
-  font-weight: 800;
-  box-shadow: 0 4px 14px rgba(181,83,47,0.25);
-}
-
-
     .place-actions {
       margin-top: auto;
       display: flex;
@@ -2715,21 +2705,13 @@
       if (item.type) metaItems.push(item.type);
 
       const distance = getDistanceKm(accommodationCoords, item.coords);
-      if (distance) metaItems.push(`${distance} km von der Unterkunft entfernt`);
+      if (distance) metaItems.push(`${distance} km von der Unterkunft`);
 
       if (Array.isArray(item.meta)) metaItems.push(...item.meta);
 
-      
-lightboxMeta.innerHTML = metaItems
-  .map(value => {
-    if (value.includes('km')) {
-      return `<span class="tag tag-distance">${value}</span>`;
-    }
-    return `<span class="tag">${value}</span>`;
-  })
-  .join('');
-
-
+      lightboxMeta.innerHTML = metaItems
+        .map(value => `<span class="tag">${value}</span>`)
+        .join('');
 
       if (item.destination) {
         lightboxDirections.href = directionsUrl(item.destination);
@@ -2812,16 +2794,9 @@ lightboxMeta.innerHTML = metaItems
     }
 
     function renderPlaces() {
-      
-let visiblePlaces = activeFilter === 'Alle'
-  ? [...places]
-  : places.filter(place => place.type === activeFilter);
-
-visiblePlaces.sort((a, b) => {
-  const distanceA = Number(getDistanceKm(accommodationCoords, a.coords));
-  const distanceB = Number(getDistanceKm(accommodationCoords, b.coords));
-  return distanceA - distanceB;
-});
+      const visiblePlaces = activeFilter === 'Alle'
+        ? places
+        : places.filter(place => place.type === activeFilter);
 
       placesGrid.innerHTML = visiblePlaces.map((place, index) => {
         const distance = getDistanceKm(accommodationCoords, place.coords);
@@ -2846,7 +2821,7 @@ visiblePlaces.sort((a, b) => {
                 <div class="place-tags">
                   <span class="tag">${place.city}</span>
                   <span class="tag">${place.type}</span>
-                  ${distance ? `<span class="tag tag-distance">${distance} km von der Unterkunft entfernt</span>` : ''}
+                  ${distance ? `<span class="tag">${distance} km von der Unterkunft entfernt</span>` : ''}
                 </div>
               </div>
             </button>
