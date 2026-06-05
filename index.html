@@ -2794,9 +2794,17 @@
     }
 
     function renderPlaces() {
-      const visiblePlaces = activeFilter === 'Alle'
-        ? places
-        : places.filter(place => place.type === activeFilter);
+      
+let visiblePlaces = activeFilter === 'Alle'
+  ? [...places]
+  : places.filter(place => place.type === activeFilter);
+
+visiblePlaces.sort((a, b) => {
+  const distanceA = Number(getDistanceKm(accommodationCoords, a.coords));
+  const distanceB = Number(getDistanceKm(accommodationCoords, b.coords));
+  return distanceA - distanceB;
+});
+
 
       placesGrid.innerHTML = visiblePlaces.map((place, index) => {
         const distance = getDistanceKm(accommodationCoords, place.coords);
