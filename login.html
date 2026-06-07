@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Familientreffen 2027 – Zugang</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(125,139,152,0.12), transparent),
+        linear-gradient(180deg, #0a0d12, #10141a);
+      color: #f4efe8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 30px;
+      width: min(90%, 380px);
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 1.8rem;
+    }
+
+    p {
+      color: #c6cad2;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      text-align: center;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: rgba(216,179,138,0.6);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      background: linear-gradient(145deg, #b5532f, #cf7a4f);
+      color: #160e0a;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px rgba(181,83,47,0.3);
+    }
+
+    .error {
+      margin-top: 10px;
+      color: #ff8d8d;
+      font-size: 0.9rem;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+    <h1>🔒 Zugang</h1>
+    <p>Familientreffen 2027</p>
+
+    <input type="password" id="pw" placeholder="Passwort eingeben">
+    <button onclick="check()">Weiter</button>
+
+    <div class="error" id="error">Falsches Passwort</div>
+  </div>
+
+  <script>
+    function check() {
+      const password = "glueckauf2027"; // 👉 HIER dein Passwort ändern
+      const input = document.getElementById('pw').value;
+
+      if (input === password) {
+        window.location.href = "seite.html";
+      } else {
+        document.getElementById('error').style.display = "block";
+      }
+    }
+
+    // ENTER drücken funktioniert auch
+    document.getElementById("pw").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        check();
+      }
+    });
+  </script>
+
+</body>
+</html>
