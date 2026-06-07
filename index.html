@@ -1263,25 +1263,40 @@
       line-height: 1.75;
     }
 
-    .accommodation-points {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
+    
 
-    .accommodation-point {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
 
-    .accommodation-point-title {
-      display: block;
-      font-weight: 800;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
+.accommodation-summary-head p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.accommodation-points {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.accommodation-point {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.accommodation-point-title {
+  display: block;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
 
     .accommodation-point-text {
       margin: 0;
@@ -1686,30 +1701,58 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
+  html {
+    scroll-behavior: auto;
+  }
 
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 
-      [data-reveal] {
-        opacity: 1;
-        transform: none;
-      }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 
-      .filter-row {
-        scroll-behavior: auto;
-      }
+  .filter-row {
+    scroll-behavior: auto;
+  }
 
-      .filter-scroll-shell.is-hinting::after {
-        animation: none;
-      }
-    }
+  .filter-scroll-shell.is-hinting::after {
+    animation: none;
+  }
+}
+
+
+/* Abstand für Einkaufsmöglichkeiten */
+#accommodation-stores {
+  margin-top: 50px;
+}
+
+/* ✅ NEU: Logos neben Text */
+.shop-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.shop-row img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* HIER eingefügt 👇👇👇 */
+.accommodation-point a {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+
   </style>
 </head>
 <body>
@@ -2035,84 +2078,138 @@
       </section>
 
       <section class="section" id="unterkunft">
-        <div class="container">
-          <div class="section-head" data-reveal>
-            <span class="section-kicker">Ankommen</span>
-            <h2>Unser Zuhause für das Wochenende</h2>
-            <p>
-              Das Alte Pastorat wird für diese Tage mehr als nur eine Unterkunft –
-              es ist der gemeinsame Mittelpunkt, an dem wir ankommen, entspannen und Zeit miteinander verbringen.
-            </p>
-          </div>
+  <div class="container">
 
-          <div class="gallery-wrap" data-reveal>
-            <div class="gallery-thumbs" id="galleryThumbs" aria-label="Unterkunftsbilder Auswahl">
-              <!-- wird per JS befüllt -->
-            </div>
-          </div>
+    <div class="section-head" data-reveal>
+      <span class="section-kicker">Unterkunft</span>
+      <h2>Unser Zuhause für das Wochenende</h2>
+      <p>
+        Das Alte Pastorat wird für diese Tage mehr als nur eine Unterkunft –
+        es ist der gemeinsame Mittelpunkt, an dem wir ankommen, entspannen und Zeit miteinander verbringen.
+      </p>
+    </div>
 
-          <div class="accommodation-summary surface-strong" data-reveal>
-            <div class="accommodation-summary-head">
-              <h3>Das Alte Pastorat auf einen Blick</h3>
-              <p>
-                Ein Ort mit ruhiger Atmosphäre, viel Platz und genau der richtigen Mischung aus Rückzug und gemeinsamer Zeit.
-              </p>
-            </div>
+    <!-- Galerie -->
+    <div class="gallery-wrap" data-reveal>
+      <div class="gallery-thumbs" id="galleryThumbs" aria-label="Unterkunftsbilder Auswahl">
+      </div>
+    </div>
 
-            <div class="accommodation-points">
-              <div class="accommodation-point">
-                <span class="accommodation-point-title">Ruhige Atmosphäre</span>
-                <p class="accommodation-point-text">
-                  Ideal zum Ankommen, Durchatmen und für ein entspanntes gemeinsames Wochenende.
-                </p>
-              </div>
-
-              <div class="accommodation-point">
-                <span class="accommodation-point-title">Gemeinschaft im Mittelpunkt</span>
-                <p class="accommodation-point-text">
-                  Aufenthaltsbereiche und gemeinsame Räume bieten Platz für Gespräche, Essen und schöne Abende zusammen.
-                </p>
-              </div>
-
-              <div class="accommodation-point">
-                <span class="accommodation-point-title">Außenbereich &amp; Garten</span>
-                <p class="accommodation-point-text">
-                  Draußen ist Raum für frische Luft, ruhige Momente und entspanntes Zusammensitzen.
-                </p>
-              </div>
-
-              <div class="accommodation-point">
-                <span class="accommodation-point-title">Mehrere Schlafmöglichkeiten</span>
-                <p class="accommodation-point-text">
-                  Rückzugsorte und Zimmer sorgen dafür, dass Gemeinschaft und Erholung gut zusammenpassen.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="address-card surface-strong" data-reveal>
-            <div class="address-wrap">
-              <div>
-                <h3 class="address-title">Adresse</h3>
-                <p class="address-copy">
-                  Sonsbecker Straße 40<br>
-                  47627 Kevelaer-Kervendonk
-                </p>
-              </div>
-
-              <div>
-                <a
-                  class="btn btn-secondary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.google.com/maps/dir/?api=1&amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
-                  In Google Maps öffnen
-                </a>
-              </div>
-            </div>
-          </div>
+    <!-- Adresse -->
+    <div class="address-card surface-strong" data-reveal>
+      <div class="address-wrap">
+        <div>
+          <h3 class="address-title">Adresse</h3>
+          <p class="address-copy">
+            Sonsbecker Straße 40<br>
+            47627 Kevelaer-Kervendonk
+          </p>
         </div>
-      </section>
+
+        <div>
+          <a
+            class="btn btn-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.google.com/maps/dir/?api=1&amp;destination=Sonsbecker+Stra%C3%9Fe+40,+47627+Kevelaer-Kervendonk">
+            In Google Maps öffnen
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Einkaufsmöglichkeiten -->
+    <div class="accommodation-summary surface-strong" data-reveal id="accommodation-stores">
+
+      <div class="accommodation-summary-head">
+        <h3>Einkaufsmöglichkeiten in der Nähe</h3>
+        <p>
+          Für alles, was wir am Wochenende brauchen – vom Frühstück bis zum Grillabend –
+          gibt es mehrere Supermärkte in kurzer Entfernung.
+        </p>
+      </div>
+
+      <div class="accommodation-points">
+
+  <div class="accommodation-point">
+    <div class="shop-row">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Lidl-Logo.svg/1280px-Lidl-Logo.svg.png" alt="Lidl Logo">
+      <span class="accommodation-point-title">Lidl (~3–4 km)</span>
+    </div>
+    <p class="accommodation-point-text">
+      Günstig und schnell für Snacks, Getränke und Frühstück.
+    </p>
+    <a
+      class="btn btn-secondary"
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.google.com/maps/search/?api=1&query=Lidl+Kevelaer">
+      Route öffnen
+    </a>
+  </div>
+
+  <div class="accommodation-point">
+    <div class="shop-row">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Logo_Edeka.svg/500px-Logo_Edeka.svg.png" alt="EDEKA Logo">
+      <span class="accommodation-point-title">EDEKA (~4–5 km)</span>
+    </div>
+    <p class="accommodation-point-text">
+      Große Auswahl und ideal für größere Einkäufe.
+    </p>
+    <a
+      class="btn btn-secondary"
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.google.com/maps/search/?api=1&query=Edeka+Kevelaer">
+      Route öffnen
+    </a>
+  </div>
+
+  <div class="accommodation-point">
+    <div class="shop-row">
+      <img src="
+https://brandslogos.com/wp-content/uploads/images/large/aldi-sued-logo.png" alt="ALDI Logo">
+      <span class="accommodation-point-title">ALDI Süd (~4–5 km)</span>
+    </div>
+    <p class="accommodation-point-text">
+      Perfekt für günstige Großeinkäufe fürs Wochenende.
+    </p>
+    <a
+      class="btn btn-secondary"
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.google.com/maps/search/?api=1&query=Aldi+Kevelaer">
+      Route öffnen
+    </a>
+  </div>
+
+  <div class="accommodation-point">
+    <div class="shop-row">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Logo_REWE.svg/1280px-Logo_REWE.svg.png" alt="REWE Logo">
+      <span class="accommodation-point-title">REWE (~4–5 km)</span>
+    </div>
+    <p class="accommodation-point-text">
+      Gute Alternative mit frischen Produkten.
+    </p>
+    <a
+      
+class="btn btn-secondary"
+    target="_blank"
+    rel="noopener noreferrer"
+    href="https://www.google.com/maps/search/?api=1&amp;query=Rewe+Kevelaer">
+    Route öffnen
+  </a>
+</div>
+
+      
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+
     </main>
 
     <footer class="footer">
