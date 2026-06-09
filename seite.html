@@ -858,11 +858,13 @@
   line-height: 1.78;
 }
 
+
 /* =========================================
-   PREMIUM ABLAUF / TIMELINE DESIGN
+   LEVEL 5 – PREMIUM ABLAUF / TIMELINE DESIGN
 ========================================= */
 
-/* ✅ CARD DESIGN (WICHTIG – NEU) */
+
+/* Card Design */
 #ablauf .card {
   position: relative;
   overflow: hidden;
@@ -870,6 +872,11 @@
     radial-gradient(circle at top right, rgba(216,179,138,0.10), transparent 28%),
     linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
   border: 1px solid rgba(255,255,255,0.10);
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease;
 }
 
 #ablauf .card::before {
@@ -880,7 +887,32 @@
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
 }
 
-/* ✅ HEADER (Tag + Datum) */
+#ablauf .card::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -80px -10%;
+  height: 140px;
+  background: radial-gradient(circle, rgba(216,179,138,0.18), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+
+#ablauf .card:hover,
+#ablauf .card:focus-within {
+  transform: translateY(-6px);
+  border-color: rgba(216,179,138,0.28);
+  box-shadow:
+    0 22px 46px rgba(0,0,0,0.30),
+    0 0 0 1px rgba(216,179,138,0.08);
+}
+
+#ablauf .card:hover::after,
+#ablauf .card:focus-within::after {
+  opacity: 1;
+}
+
+/* Header */
 #ablauf .timeline-head {
   display: flex;
   justify-content: space-between;
@@ -903,9 +935,17 @@
   border: 1px solid rgba(216,179,138,0.3);
   color: var(--accent-2);
   white-space: nowrap;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
 
-/* ✅ TIMELINE LISTE */
+#ablauf .card:hover .timeline-date,
+#ablauf .card:focus-within .timeline-date {
+  background: rgba(216,179,138,0.18);
+  border-color: rgba(216,179,138,0.42);
+  transform: translateY(-1px);
+}
+
+/* Timeline List */
 #ablauf .timeline-list {
   list-style: none;
   padding: 0;
@@ -916,21 +956,21 @@
 #ablauf .timeline-list::before {
   content: "";
   position: absolute;
-  left: 8px;
-  top: 8px;
-  bottom: 8px;
+  left: 13px;
+  top: 10px;
+  bottom: 10px;
   width: 2px;
   background: linear-gradient(
     to bottom,
-    rgba(216,179,138,0.65),
+    rgba(216,179,138,0.72),
     rgba(255,255,255,0.08)
   );
 }
 
 #ablauf .timeline-list li {
   position: relative;
-  padding-left: 30px;
-  margin-bottom: 12px;
+  padding-left: 42px;
+  margin-bottom: 14px;
   color: var(--text);
   line-height: 1.65;
 }
@@ -939,19 +979,26 @@
   margin-bottom: 0;
 }
 
+/* Level 5: Icon-Bubbles */
 #ablauf .timeline-list li::before {
-  content: "";
+  content: attr(data-icon);
   position: absolute;
   left: 0;
-  top: 6px;
-  width: 14px;
-  height: 14px;
+  top: 2px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: var(--accent-2);
-  box-shadow: 0 0 10px rgba(216,179,138,0.4);
+  display: grid;
+  place-items: center;
+  font-size: 0.9rem;
+  background: linear-gradient(145deg, rgba(216,179,138,0.22), rgba(255,255,255,0.08));
+  border: 1px solid rgba(216,179,138,0.30);
+  box-shadow:
+    0 0 0 4px rgba(216,179,138,0.05),
+    0 0 14px rgba(216,179,138,0.16);
 }
 
-/* ✅ NOTE BOX */
+/* Note Box */
 #ablauf .timeline-note {
   margin-top: 14px;
   padding: 12px 14px;
@@ -965,6 +1012,7 @@
 #ablauf .timeline-note strong {
   color: var(--text);
 }
+
     
 
     .places-toolbar {
@@ -2113,6 +2161,9 @@
     <div class="section-head" data-reveal>
       <span class="section-kicker">Ablauf</span>
       <h2>Vorschlag zum Ablauf</h2>
+      <p>
+        Ein möglicher roter Faden für das Wochenende – entspannt, flexibel und als gemeinsame Orientierung gedacht.
+      </p>
     </div>
 
     <div class="card-grid">
@@ -2127,18 +2178,14 @@
           </div>
 
           <ul class="timeline-list">
-            <li>Anreise & Ankommen</li>
-            <li>Zimmer beziehen</li>
-            <li>Haus erkunden</li>
+            <li data-icon="🚗">Anreise &amp; Ankommen</li>
+            <li data-icon="🛏️">Zimmer beziehen</li>
+            <li data-icon="🏡">Haus erkunden</li>
           </ul>
 
-          
-
-<div class="timeline-note">
-  <strong>Abends:</strong> Grillen und entspannen
-</div>
-
-
+          <div class="timeline-note">
+            <strong>Abends:</strong> Grillen und entspannen
+          </div>
 
         </div>
       </article>
@@ -2153,16 +2200,14 @@
           </div>
 
           <ul class="timeline-list">
-            <li>Frühstück zusammen</li>
-            <li>abgestimmte Aktivitäten</li>
-            <li>Zeit für alle</li>
+            <li data-icon="☕">Frühstück zusammen</li>
+            <li data-icon="🎯">abgestimmte Aktivitäten</li>
+            <li data-icon="👨‍👩‍👧‍👦">Zeit für alle</li>
           </ul>
 
-          
-<div class="timeline-note">
-  <strong>Abends:</strong> gemeinsames Essen
-</div>
-
+          <div class="timeline-note">
+            <strong>Abends:</strong> gemeinsames Essen
+          </div>
 
         </div>
       </article>
@@ -2177,16 +2222,14 @@
           </div>
 
           <ul class="timeline-list">
-            <li>Ausflug ins Ruhrgebiet</li>
-            <li>abgestimmte Orte</li>
-            <li>gemeinsam erleben</li>
+            <li data-icon="🚉">Ausflug ins Ruhrgebiet</li>
+            <li data-icon="📍">abgestimmte Orte</li>
+            <li data-icon="✨">gemeinsam erleben</li>
           </ul>
 
-          
-<div class="timeline-note">
-  <strong>Abends:</strong> gemütlicher Ausklang
-</div>
-
+          <div class="timeline-note">
+            <strong>Abends:</strong> gemütlicher Ausklang
+          </div>
 
         </div>
       </article>
@@ -2201,9 +2244,9 @@
           </div>
 
           <ul class="timeline-list">
-            <li>Frühstück</li>
-            <li>zusammensitzen</li>
-            <li>Abreise</li>
+            <li data-icon="🥐">Frühstück</li>
+            <li data-icon="💬">zusammensitzen</li>
+            <li data-icon="👋">Abreise</li>
           </ul>
 
         </div>
