@@ -858,23 +858,113 @@
   line-height: 1.78;
 }
 
-/* ✅ HIER EINFÜGEN 👇 */
-.card ul {
-  margin: 12px 0;
-  padding-left: 16px;
-  display: grid;
-  gap: 6px;
+/* =========================================
+   PREMIUM ABLAUF / TIMELINE DESIGN
+========================================= */
+
+/* ✅ CARD DESIGN (WICHTIG – NEU) */
+#ablauf .card {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top right, rgba(216,179,138,0.10), transparent 28%),
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.10);
 }
 
-.card li {
-  font-weight: 500;
+#ablauf .card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+}
+
+/* ✅ HEADER (Tag + Datum) */
+#ablauf .timeline-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+#ablauf .timeline-day {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+#ablauf .timeline-date {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(216,179,138,0.12);
+  border: 1px solid rgba(216,179,138,0.3);
+  color: var(--accent-2);
+  white-space: nowrap;
+}
+
+/* ✅ TIMELINE LISTE */
+#ablauf .timeline-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  position: relative;
+}
+
+#ablauf .timeline-list::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(216,179,138,0.65),
+    rgba(255,255,255,0.08)
+  );
+}
+
+#ablauf .timeline-list li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+#ablauf .timeline-list li:last-child {
+  margin-bottom: 0;
+}
+
+#ablauf .timeline-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  box-shadow: 0 0 10px rgba(216,179,138,0.4);
+}
+
+/* ✅ NOTE BOX */
+#ablauf .timeline-note {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+#ablauf .timeline-note strong {
   color: var(--text);
 }
-
-.card li::marker {
-  color: var(--accent-2);
-}
-
     
 
     .places-toolbar {
@@ -1671,6 +1761,11 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
+#ablauf .card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+
       .places-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
@@ -2018,80 +2113,105 @@
     <div class="section-head" data-reveal>
       <span class="section-kicker">Ablauf</span>
       <h2>Vorschlag zum Ablauf</h2>
-      <p>
-        Dieser Ablauf ist nur eine Orientierung – wir entscheiden alles gemeinsam
-        und spontan, so wie es sich für uns am besten anfühlt.
-      </p>
     </div>
 
-    <div class="card-grid info-grid">
+    <div class="card-grid">
 
+      <!-- Donnerstag -->
       <article class="card" data-reveal>
         <div class="card-body">
-          <h3>🗓️ Donnerstag – Ankommen & Einstimmen</h3>
-          <p>Individuelle Anreise und ruhiges Ankommen.</p>
-          <ul>
+
+          <div class="timeline-head">
+            <h3 class="timeline-day">Donnerstag – Ankommen</h3>
+            <span class="timeline-date">06.05.2027</span>
+          </div>
+
+          <ul class="timeline-list">
+            <li>Anreise & Ankommen</li>
             <li>Zimmer beziehen</li>
-            <li>Unterkunft erkunden</li>
-            <li>gemeinsame Zeit im Haus</li>
+            <li>Haus erkunden</li>
           </ul>
-          <p>Abends:</p>
-          <ul>
-            <li>Grillen</li>
-            <li>Zusammensitzen</li>
-          </ul>
+
+          
+
+<div class="timeline-note">
+  <strong>Abends:</strong> Grillen und entspannen
+</div>
+
+
+
         </div>
       </article>
 
+      <!-- Freitag -->
       <article class="card" data-reveal>
         <div class="card-body">
-          <h3>👨‍👩‍👧 Freitag – Für die Kinder & gemeinsame Zeit</h3>
-          <p>Gemeinsames Frühstück und entspannter Start.</p>
-          <ul>
-            <li>spontane Tagesplanung</li>
-            <li>Aktivitäten für alle</li>
+
+          <div class="timeline-head">
+            <h3 class="timeline-day">Freitag – Familienzeit</h3>
+            <span class="timeline-date">07.05.2027</span>
+          </div>
+
+          <ul class="timeline-list">
+            <li>Frühstück zusammen</li>
+            <li>Spontane Aktivitäten</li>
+            <li>Zeit für alle</li>
           </ul>
-          <p>Abends:</p>
-          <ul>
-            <li>gemeinsames Essen</li>
-            <li>ruhiger Ausklang</li>
-          </ul>
+
+          
+<div class="timeline-note">
+  <strong>Abends:</strong> gemeinsames Essen
+</div>
+
+
         </div>
       </article>
 
+      <!-- Samstag -->
       <article class="card" data-reveal>
         <div class="card-body">
-          <h3>🏭 Samstag – Ruhrgebiet erleben</h3>
-          <p>Gemeinsamer Start und Fahrt ins Ruhrgebiet.</p>
-          <p>👉 Ziele werden spontan gewählt.</p>
-          <ul>
-            <li>gemeinsame Entscheidung</li>
-            <li>verschiedene Möglichkeiten entdecken</li>
+
+          <div class="timeline-head">
+            <h3 class="timeline-day">Samstag – Ruhrgebiet</h3>
+            <span class="timeline-date">08.05.2027</span>
+          </div>
+
+          <ul class="timeline-list">
+            <li>Ausflug ins Ruhrgebiet</li>
+            <li>Orte spontan wählen</li>
+            <li>gemeinsam erleben</li>
           </ul>
-          <p>Abends:</p>
-          <ul>
-            <li>Rückkehr</li>
-            <li>gemeinsam ausklingen lassen</li>
-          </ul>
+
+          
+<div class="timeline-note">
+  <strong>Abends:</strong> gemütlicher Ausklang
+</div>
+
+
         </div>
       </article>
 
+      <!-- Sonntag -->
       <article class="card" data-reveal>
         <div class="card-body">
-          <h3>☕ Sonntag – Ausklang</h3>
-          <p>Ruhiger Start und gemeinsames Frühstück.</p>
-          <ul>
-            <li>letzte Gespräche</li>
-            <li>Zusammensitzen</li>
+
+          <div class="timeline-head">
+            <h3 class="timeline-day">Sonntag – Abschluss</h3>
+            <span class="timeline-date">09.05.2027</span>
+          </div>
+
+          <ul class="timeline-list">
+            <li>Frühstück</li>
+            <li>zusammensitzen</li>
+            <li>Abreise</li>
           </ul>
-          <p>Abreise im Laufe des Tages.</p>
+
         </div>
       </article>
 
     </div>
   </div>
 </section>
-
 
       <section class="section" id="orte">
         <div class="container">
