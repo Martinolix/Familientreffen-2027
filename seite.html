@@ -851,11 +851,31 @@
       line-height: 1.25;
     }
 
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.78;
-    }
+    
+.card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.78;
+}
+
+/* ✅ HIER EINFÜGEN 👇 */
+.card ul {
+  margin: 12px 0;
+  padding-left: 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.card li {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.card li::marker {
+  color: var(--accent-2);
+}
+
+    
 
     .places-toolbar {
       display: grid;
@@ -1800,13 +1820,19 @@
           </div>
         </a>
 
-        <nav class="nav-inline" aria-label="Hauptnavigation">
-          <a class="nav-link" href="#countdown" data-nav-link="countdown">Countdown</a>
-          <a class="nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick</a>
-          <a class="nav-link" href="#orte" data-nav-link="orte">Orte</a>
-          <a class="nav-link" href="#events" data-nav-link="events">Events</a>
-          <a class="nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft</a>
-        </nav>
+        
+<nav class="nav-inline" aria-label="Hauptnavigation">
+  <a class="nav-link" href="#countdown" data-nav-link="countdown">Countdown</a>
+  <a class="nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick</a>
+
+  <!-- ✅ HIER EINFÜGEN -->
+  <a class="nav-link" href="#ablauf" data-nav-link="ablauf">Ablauf</a>
+
+  <a class="nav-link" href="#orte" data-nav-link="orte">Orte</a>
+  <a class="nav-link" href="#events" data-nav-link="events">Events</a>
+  <a class="nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft</a>
+</nav>
+
 
         <button
           class="nav-toggle"
@@ -1836,13 +1862,20 @@
         <button class="mobile-nav-close" id="mobileNavClose" type="button" aria-label="Menü schließen">✕</button>
       </div>
 
-      <nav class="mobile-nav-links" aria-label="Mobile Navigation">
-        <a class="mobile-nav-link" href="#countdown" data-nav-link="countdown">Countdown <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#orte" data-nav-link="orte">Orte <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#events" data-nav-link="events">Events <span aria-hidden="true">→</span></a>
-        <a class="mobile-nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft <span aria-hidden="true">→</span></a>
-      </nav>
+      
+<nav class="mobile-nav-links" aria-label="Mobile Navigation">
+  <a class="mobile-nav-link" href="#countdown" data-nav-link="countdown">Countdown <span aria-hidden="true">→</span></a>
+
+  <a class="mobile-nav-link" href="#ueberblick" data-nav-link="ueberblick">Überblick <span aria-hidden="true">→</span></a>
+
+  <!-- ✅ NEU -->
+  <a class="mobile-nav-link" href="#ablauf" data-nav-link="ablauf">Ablauf <span aria-hidden="true">→</span></a>
+
+  <a class="mobile-nav-link" href="#orte" data-nav-link="orte">Orte <span aria-hidden="true">→</span></a>
+  <a class="mobile-nav-link" href="#events" data-nav-link="events">Events <span aria-hidden="true">→</span></a>
+  <a class="mobile-nav-link" href="#unterkunft" data-nav-link="unterkunft">Unterkunft <span aria-hidden="true">→</span></a>
+</nav>
+
     </aside>
 
     <main id="main">
@@ -1978,6 +2011,87 @@
           </div>
         </div>
       </section>
+
+<section class="section" id="ablauf">
+  <div class="container">
+
+    <div class="section-head" data-reveal>
+      <span class="section-kicker">Ablauf</span>
+      <h2>Vorschlag zum Ablauf</h2>
+      <p>
+        Dieser Ablauf ist nur eine Orientierung – wir entscheiden alles gemeinsam
+        und spontan, so wie es sich für uns am besten anfühlt.
+      </p>
+    </div>
+
+    <div class="card-grid info-grid">
+
+      <article class="card" data-reveal>
+        <div class="card-body">
+          <h3>🗓️ Donnerstag – Ankommen & Einstimmen</h3>
+          <p>Individuelle Anreise und ruhiges Ankommen.</p>
+          <ul>
+            <li>Zimmer beziehen</li>
+            <li>Unterkunft erkunden</li>
+            <li>gemeinsame Zeit im Haus</li>
+          </ul>
+          <p>Abends:</p>
+          <ul>
+            <li>Grillen</li>
+            <li>Zusammensitzen</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card-body">
+          <h3>👨‍👩‍👧 Freitag – Für die Kinder & gemeinsame Zeit</h3>
+          <p>Gemeinsames Frühstück und entspannter Start.</p>
+          <ul>
+            <li>spontane Tagesplanung</li>
+            <li>Aktivitäten für alle</li>
+          </ul>
+          <p>Abends:</p>
+          <ul>
+            <li>gemeinsames Essen</li>
+            <li>ruhiger Ausklang</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card-body">
+          <h3>🏭 Samstag – Ruhrgebiet erleben</h3>
+          <p>Gemeinsamer Start und Fahrt ins Ruhrgebiet.</p>
+          <p>👉 Ziele werden spontan gewählt.</p>
+          <ul>
+            <li>gemeinsame Entscheidung</li>
+            <li>verschiedene Möglichkeiten entdecken</li>
+          </ul>
+          <p>Abends:</p>
+          <ul>
+            <li>Rückkehr</li>
+            <li>gemeinsam ausklingen lassen</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card-body">
+          <h3>☕ Sonntag – Ausklang</h3>
+          <p>Ruhiger Start und gemeinsames Frühstück.</p>
+          <ul>
+            <li>letzte Gespräche</li>
+            <li>Zusammensitzen</li>
+          </ul>
+          <p>Abreise im Laufe des Tages.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 
       <section class="section" id="orte">
         <div class="container">
